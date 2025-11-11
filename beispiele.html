@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="Favicon_112x112.jpg">
+  <title>IT-SafeZone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+      background-size: cover;
+      background-position: center;
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+    }
+
+          body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hinter dem Inhalt */
+      }
+
+            .content, footer {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+ padding: 0.25rem 0.75rem !important; /* weniger Höhe */
+  min-height: 58px; /* reduziert Gesamthöhe */
+}
+
+.navbar-brand h2 {
+  font-size: 1.6rem; /* kleinerer Titel */
+  margin: 0; /* kein zusätzlicher Außenabstand */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.nav-link h5 {
+  font-size: 1.05rem; /* kompaktere Links */
+  margin: 0; 
+  line-height: 1.3;
+   font-weight: 500;
+}
+
+.navbar img {
+  max-width: 140px; /* Logo etwas kleiner */
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Mobile: noch kompakter */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  .navbar-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .navbar img {
+    max-width: 120px;
+  }
+
+  .nav-link h5 {
+    font-size: 1rem;
+  }
+}
+
+       .navbar.bg-body-tertiary, footer, .sidebar {
+  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+    .nav-link.active {
+  color: #8cd000;
+}
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-link:hover {
+      color: #8cd000;
+    }
+
+    a:active {
+      text-decoration: underline;
+      color: #8cd000;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f4f4f4;
+      position: fixed;
+      top: 75px;
+      left: 0;
+      height: calc(100vh - 75px);
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
+      transition: all 0.3s;
+    }
+
+    .sidebar ul li.active {
+      background: #ddd;
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
+    }
+
+    .sidebar ul li:hover {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+.offcanvas-body li.nav-link.active a {
+  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
+  background-color: transparent !important; /* Kein Hintergrund */
+}
+
+    .content {
+      margin-left: 250px;
+      margin-top: 75px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .content-section {
+    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
+    margin-bottom: 2rem;
+    font-family: var(--bs-body-font-family);  /* gleiche Schriftart wie Bootstrap MALWARE*/
+    color: var(--bs-body-color); /* MALWARE*/
+    }
+
+    /* ✅ NEU: Einheitlicher Fließtext MALWARE*/
+    .content-section p,
+    .content-section .lead {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #000;
+    font-weight: 400;
+    }
+
+    /* ✅ NEU: SVG soll Standardschrift übernehmen MALWARE*/
+    #malware svg text {
+    font-family: var(--bs-body-font-family); 
+    fill: #000; /* gleiche Textfarbe wie normale Schrift */
+    }
+
+    footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
+}
+
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
+}
+
+    @media (max-height: 910px) {
+      body {
+        overflow-y: auto;
+      }
+    }
+
+    @media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+}
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+      }
+    }
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+    }
+
+    .previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #8cd000;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* optional Abstand nach außen */
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #8cd000;
+  color: white;
+}
+
+.diagram-wrapper {
+    max-width: 1100px;
+    margin: 1rem auto;
+    box-shadow: 0 6px 24px rgba(16,24,40,0.06);
+    border-radius: 12px;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,248,251,0.9));
+  }
+
+  /* leichte Animation: Warnsymbol pulsiert */
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.06); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+  }
+  /* Ziel: das <g id="warning"> inlined im SVG wird animiert per CSS */
+  svg #warning { transform-origin: center; animation: pulse 1.6s ease-in-out infinite; }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .diagram-wrapper { padding: 6px; }
+    svg { width: 100%; height: auto; }
+  }
+
+  :root { --card-bg: #ffffff; --page-bg: #f8fafc; --text:#0f172a; --muted:#475569; }
+  .card { background: var(--card-bg); border-radius:12px; padding:14px; box-shadow:0 10px 30px rgba(2,6,23,0.06); max-width:1100px; margin:24px auto; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <button class="btn btn-outline-success d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+      ☰
+    </button>
+
+    <!-- Titel links -->
+    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+
+    <!-- ZENTRIERTE LINKS -->
+    <div class="d-none d-lg-flex justify-content-center flex-grow-1">
+      <div class="d-flex gap-4">
+<a href="allgemeines.html" class="nav-link"><h5>ALLGEMEINES</h5></a>
+<a href="methoden.html" class="nav-link"><h5>METHODEN</h5></a>
+<a href="beispiele.html" class="nav-link active"><h5>BEISPIELE</h5></a>
+<a href="schutz.html" class="nav-link"><h5>SCHUTZ</h5></a>
+<a href="quiz.html" class="nav-link"><h5>QUIZ</h5></a>
+      </div>
+    </div>
+
+    <!-- Logo rechts -->
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+  </div>
+</nav>
+
+    <!-- Sidebar -->
+ <div class="sidebar d-none d-lg-block">
+    <ul>
+      <li class="menu-item active" data-section="malware">Malware</li>
+      <li class="menu-item" data-section="spam">Spam</li>
+      <li class="menu-item" data-section="phishing">Phishing</li>
+      <!--<li class="menu-item" data-section="ransomware">Ransomware</li> -->
+      <li class="menu-item" data-section="mitm">Man-in-the-Middle-Angriff</li>
+      <li class="menu-item" data-section="ddos">DoS- und DDoS-Angriffe</li>
+    </ul>
+  </div>
+
+  <!-- Offcanvas Sidebar (Mobile) -->
+  <div class="offcanvas offcanvas-start d-flex flex-column align-items-center text-center" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" aria-label="Schließen"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul>
+        <li class="nav-link"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+        <li class="nav-link"><a href="methoden.html"><h5>METHODEN</h5></a></li>
+        <li class="nav-link active"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+        <li class="nav-link"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+        <li class="nav-link"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- Main Content -->
+     <div class="content">
+      <section id="malware" class="content-section" aria-labelledby="wannacry-schema">
+        <h2>Malware</h2>
+        <p class="lead">Ablauf: Einstieg → Verbreitung → Wirkung → Entdeckung (Kill-Switch)</p>
+
+  <div class="card">
+    <!-- viewBox-Höhe angepasst; overflow sichtbar -->
+    <svg viewBox="0 0 1200 470" role="img"
+         aria-label="Visuelles Schema: WannaCry Ransomware Beispiel - Einstieg, Verbreitung, Wirkung, Kill Switch"
+         style="width:100%; height:auto; overflow:visible; display:block;">
+
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#374151"/>
+        </marker>
+      </defs>
+
+      <!-- Titelbereich (oben links) -->
+      <text x="40" y="36" font-size="18" font-weight="700" fill="#0f172a">WannaCry (Mai 2017) — Ablauf & Wirkung</text>
+      <text x="40" y="54" font-size="12" fill="#475569">Mehr als 200.000 Rechner in über 150 Ländern betroffen; NHS, Firmen u. a.</text>
+
+      <!-- TOP ROW: 3 Steps -->
+
+      <!-- STEP 1: Einstieg (links) -->
+      <g transform="translate(40,84)">
+        <rect x="0" y="0" width="300" height="120" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+        <text x="150" y="30" font-size="16" font-weight="700" text-anchor="middle" fill="#0f172a">1) Einstieg</text>
+        <text x="150" y="56" font-size="13" text-anchor="middle" fill="#334155">Ungepatchtes Windows (EternalBlue) / Phishing</text>
+        <text x="150" y="78" font-size="12" text-anchor="middle" fill="#334155">alte Systeme ohne Update</text>
+        <!-- Icon -->
+        <rect x="18" y="86" width="44" height="26" rx="6" fill="#fff" stroke="#c7d2fe"/>
+        <text x="40" y="104" font-size="14" text-anchor="middle">💻</text>
+      </g>
+
+      <!-- Arrow 1 -->
+      <path d="M 360 144 L 440 144" stroke="#94a3b8" stroke-width="6" marker-end="url(#arrow)"/>
+
+      <!-- STEP 2: Verbreitung (center) -->
+      <g transform="translate(450,84)">
+        <rect x="0" y="0" width="300" height="120" rx="12" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="150" y="30" font-size="16" font-weight="700" text-anchor="middle" fill="#0f172a">2) Verbreitung</text>
+        <text x="150" y="58" font-size="13" text-anchor="middle" fill="#334155">Wurm-ähnliche Ausbreitung im Netzwerk</text>
+        <text x="150" y="80" font-size="12" text-anchor="middle" fill="#334155">springt automatisch zu anderen Rechnern</text>
+        <!-- network icon -->
+        <g transform="translate(64,86)">
+          <circle cx="20" cy="14" r="10" fill="#fff" stroke="#fde68a"/>
+          <circle cx="80" cy="14" r="10" fill="#fff" stroke="#fde68a"/>
+          <path d="M 30 14 L 70 14" stroke="#f59e0b" stroke-width="2"/>
+        </g>
+      </g>
+
+      <!-- Arrow 2 -->
+      <path d="M 760 144 L 840 144" stroke="#94a3b8" stroke-width="6" marker-end="url(#arrow)"/>
+
+      <!-- STEP 3: Wirkung (right) -->
+      <g transform="translate(860,84)">
+        <!-- keep box width smaller so it fits on desktop; on very small screens svg scales -->
+        <rect x="0" y="0" width="260" height="120" rx="12" fill="#fff0f0" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="130" y="30" font-size="16" font-weight="700" text-anchor="middle" fill="#0f172a">3) Wirkung</text>
+        <text x="130" y="58" font-size="13" text-anchor="middle" fill="#334155">Dateien verschlüsselt / Dienste ausgefallen</text>
+        <text x="130" y="80" font-size="12" text-anchor="middle" fill="#334155">Betroffene: NHS, FedEx, Nissan u. a.</text>
+        <!-- lock icon -->
+        <rect x="106" y="86" width="48" height="26" rx="6" fill="#fff" stroke="#fecaca"/>
+        <text x="130" y="104" font-size="14" text-anchor="middle">🔒</text>
+      </g>
+
+      <!-- curve down to centered Kill-Switch -->
+      <path d="M 200 220 C 350 240, 650 240, 520 300" fill="none" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- STEP 4: Kill-Switch (center bottom) -->
+      <g transform="translate(320,310)">
+        <rect x="0" y="0" width="360" height="120" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+        <text x="180" y="30" font-size="16" font-weight="700" text-anchor="middle" fill="#065f46">4) Entdeckung: Kill-Switch</text>
+        <text x="180" y="62" font-size="13" text-anchor="middle" fill="#065f46">Forscher entdeckten eine im Code versteckte Domain → Ausbreitung gebremst</text>
+        <text x="180" y="86" font-size="12" text-anchor="middle" fill="#065f46">Viele Rechner blieben jedoch verschlüsselt</text>
+        <!-- stop icon -->
+        <rect x="156" y="92" width="48" height="24" rx="6" fill="#fff" stroke="#bbf7d0"/>
+        <text x="180" y="110" font-size="14" text-anchor="middle">⛔</text>
+      </g>
+
+      <!-- Fußtext / Legende -->
+      <text x="40" y="446" font-size="12" fill="#475569">Legende: 1=Einstieg / 2=Verbreitung / 3=Wirkung / 4=Kill-Switch (zentrale Entdeckung)</text>
+
+    </svg>
+  </div>
+      Das Schema stellt den Ablauf der WannaCry-Ransomware dar, die 2017 über den Exploit „EternalBlue“ massenhaft Windows-Systeme infizierte. Eine kleine Sicherheitslücke genügte, um Computer weltweit zu infizieren.
+      Nach der automatischen Verbreitung über interne Netzwerke wurden Daten verschlüsselt und Lösegeld gefordert. Ein im Code entdeckter „Kill-Switch“ konnte die Ausbreitung stoppen, doch viele Systeme blieben verschlüsselt.<br>
+      Es zeigt, wie ein einzelner infizierter Rechner eine weltweite Kettenreaktion auslösen kann.<br><br>
+      <ul>
+              <li>Einstieg: Technischer Fehler<br>
+            <ul>
+              <li>Die Malware nutzt eine Sicherheitslücke („EternalBlue“) in ungepatchten Windows-Systemen. Ein infizierter Rechner (z. B. ein Firmen-PC ohne Update) wird zur Eintrittspforte.</li>
+              </ul>
+              </li><br>
+
+              <li>Verbreitung: Ausbreitung<br>
+            <ul>
+              <li>Der Schadcode verbreitet sich wie ein Wurm automatisch an andere Rechner im selben Netzwerk. Dadurch wird in kurzer Zeit eine riesige Zahl von Systemen infiziert.</li>
+            </ul>
+              </li><br>
+            
+              <li>Wirkung: Schaden<br>
+            <ul>
+              <li>Auf den betroffenen Computern werden Dateien verschlüsselt. Eine Lösegeldforderung („Ransom“) erscheint – viele Dienste, Firmen und Krankenhäuser sind lahmgelegt.</li>
+            </ul>
+              </li><br>
+
+              <li>Entdeckung („Kill-Switch“): Abwehr
+            <ul>
+              <li>Ein Sicherheitsforscher entdeckt im Programmcode eine bestimmte Internet-Adresse. Als er sie registriert, stoppt die Malware ihre Ausbreitung – das war der „Kill-Switch“.
+              Trotzdem bleiben viele Systeme unbrauchbar.</li>
+            </ul>
+              </li><br>
+          </ul>
+          Gefahren:<br>Betriebsstörungen, Finanzbetrug, Identitätsdiebstahl, Malware-Injektion
+      </section>
+
+      <section id="spam" class="content-section">
+        <h2>Spam</h2>
+        <p style="font-size:17px"><img src="spam.png" alt="Logo" width="600" height="600"><br><br>
+          Dies ist ein Musterbeispiel für eine Spam- bzw. Phishing-Mail, die eine täuschend echte Wirkung erzielen soll.<br> Im Folgenden werden die Merkmale auf dem Bild erläutert und deren Bedeutung dargelegt.
+          <ul>
+              <li>Warten Sie Nicht! Ihr Angebot Läuft In Stunden Ab!<br>
+            <ul>
+              <li>Betreffzeile erzeugt künstliche Dringlichkeit, um schnelles Handeln zu erzwingen.</li>
+              </ul>
+              </li><br>
+
+              <li>Absender: deutschepost.de/de Noreply-t3pug0Fr@t3pug0fr.de<br>
+            <ul>
+              <li>Verdächtige, lange oder zufällige Adresse – kein offizieller Firmenabsender. Die richtige Adresse lautet: „@deutschepost.de“. Aus diesem Grund ist es wichtig auf den Aufbau der Absenderadresse zu achten.</li>
+            </ul>
+              </li><br>
+            
+              <li>Spam-Hinweis: Diese Nachricht weist große Ähnlichkeit mit früheren Spamnachrichten auf.<br>
+            <ul>
+              <li>Mailanbieter erkennt bekannte Muster und markiert sie automatisch als verdächtig.</li><br>
+              <img src="spam-meldung.png" width="800">
+            </ul>
+              </li><br>
+
+              <li>Angebot: „Paket mit 50 Briefmarken“ – angeblich kostenloses Gewinnversprechen.
+            <ul>
+              <li>lockt mit Gratisangeboten oder Belohnungen, um Neugier oder Gier auszunutzen.</li>
+              <li>Typisches Mittel, um Klicks und Daten zu erhalten.</li>
+            </ul>
+              </li><br>
+
+              <li>Handlungsaufforderung: Großer Button „JETZT SICHERN“.
+            <ul>
+              <li>Farbige Buttons ziehen Aufmerksamkeit auf sich.</li>
+              <li>Klick führt meist auf gefälschte Websites oder Datenerfassungsseiten.</li>
+              <li>der Aufruf solcher Links birgt das Risiko, dass Nutzer:innen ungewollt ihre persönlichen Daten auf einer Phishing-Seite preisgeben.</li>
+            </ul>
+              </li><br>
+
+              <li>Sprache und Stil: Ungewöhnliche Großschreibung und kleine Grammatikfehler → "Warten Sie Nicht! Ihr Angebot Läuft in Stunden Ab!" oder "einen Paket mit 50 Briefmarken".
+            <ul>
+              <li>Oft ein Hinweis auf automatische Übersetzung oder unseriöse Herkunft.</li>
+            </ul>
+              </li><br>
+
+              <li>Kein Impressum
+            <ul>
+              <li>In der E-Mail finden sich keine allgemeinen Kontaktinformationen wie die Firmenadresse, Telefonnummer oder offizielle Firmennummer.</li>
+            </ul>
+              </li><br>
+          </ul>
+          Gefahren:<br>Finanzbetrug, Identitätsdiebstahl, Malware-Injektion
+        </p>
+      </section>
+
+      <section id="phishing" class="content-section">
+        <h2>Phishing</h2>
+        <p style="font-size:17px;"><img src="spam-phishing.png" alt="Logo" width="800"><br><br>
+          Diese E-Mail ist ein klassisches Beispiel für eine Phishing-Nachricht, die sich als DPD-Paketbenachrichtigung tarnt, um den Empfänger zu täuschen und vermutlich auf eine betrügerische Website zu lenken oder persönliche Daten (z. B. Kreditkartendaten) zu stehlen.
+          Im weiteren Verlauf werden zunächst die einzelnen Merkmale auf dem Bild erläutert, gefolgt von einer Erläuterung ihrer jeweiligen Bedeutungen.
+          <ul>
+              <li>Absenderadresse ist verdächtig: DPD™ WrosNKjP@wrosnkjp.us<br>
+            <ul>
+              <li>Kein offizieller DPD-Absender – seriöse Unternehmen nutzen Domains wie @dpd.de</li>
+              <li>Die Domain wrosnkjp.us ist nicht vertrauenswürdig, sieht zufällig generiert aus</li>
+              → Erkennungsmerkmal Nr. 1 für Phishing<br>
+              <img src="spam-phishing-absender.png" width="350">
+              </ul>
+              </li><br>
+
+              <li>Betreff wirkt dramatisch & druckausübend: Letzte Erinnerung zur Bestätigung Ihres Pakets<br>
+            <ul>
+              <li>erzeugt künstlichen Handlungsdruck („Letzte Erinnerung“)</li>
+              <li>Typisch für Phishing: psychologischer Druck um Nutzer zu schnellen und unüberlegten Klicks zu bewegen</li>
+            </ul>
+              </li><br>
+            
+              <li>Sprache & Formulierungen sind unprofessionell: „LEVERINGAUFHÄNGUNG TEIL DES PAKETS“<br>
+            <ul>
+                <li>Dieses Wort ist eine Mischung aus Deutsch und Niederländisch</li>
+              <ul>
+                <li>„Levering“ = Lieferung (niederländisch)</li>
+                <li>„Aufhängung“ = im Kontext falsch</li>
+              </ul>
+                <li>Weitere sprachliche Merkmale:</li>
+              <ul>
+                <li>„Sei und finde die Sonne!“ – völlig unpassend</li>
+                <li>„DPD Express-Service“ – untypische Signatur</li>
+              </ul>
+              → Typisch für Betrugsmails: Übersetzungsfehler, unpassende Redensarten
+            </ul>
+              </li><br>
+
+              <li>Verdächtige Links: Link z. B.: 58412233520000
+            <ul>
+              <li>Es sieht wie eine Paketnummer aus, ist aber verlinkt – unbezweifelbar zu einer gefälschten Website</li>
+              <li>Der große rote Button "PROBLEM GELÖST" ist ein Klickköder (Nach Klicks fischen), genau zu einer gefälschten DPD-Anmeldeseite oder Zahlungsseite</li>
+            </ul>
+              </li><br>
+
+              <li>Aufforderung zur Aktion innerhalb weniger Tage: „Bitte beheben Sie dieses Problem innerhalb von (5) Werktagen“
+            <ul>
+              <li>Typische Phishing-Taktik: kurze Frist → Druck → unüberlegte Handlung</li>
+            </ul>
+              </li><br>
+
+              <li>Fußzeile mit irreführenden Abmeldehinweisen: „Wenn Sie aus unserer Liste entfernt werden möchten… klicken Sie hier“
+            <ul>
+              <li>Diese Links führen oft nicht zur Abmeldung, sondern zu weiterer Datenerhebung oder Malware</li>
+              <li>Auch die Adresse in den USA (Flower Mound, TX) ist nicht mit DPD verbunden</li>
+            </ul>
+              </li><br>
+
+              <li>Kein Impressum
+            <ul>
+              <li>In der E-Mail finden sich keine allgemeinen Kontaktinformationen wie die Firmenadresse, Telefonnummer oder offizielle Firmennummer.</li>
+            </ul>
+              </li>
+          </ul>
+              Gefahren:<br>Kontoübernahmen, Finanzbetrug, Identitätsdiebstahl, Malware-Injektion
+        </p>
+
+      </section>
+
+      <!--<section id="ransomware" class="content-section">
+        <h2>Ransomware</h2>
+        <p style="font-size:17px"></p>
+        </section>-->
+      
+      <section id="mitm" class="content-section">
+        <h2>Man-in-the-Middle-Angriff</h2>
+        <p style="font-size:17px">
+          <img src="mitm_wifi_expanded.jpg" alt="Logo" width="700"><br><br>
+          <p>
+    Kurzfassung:<br>
+    Das Diagramm zeigt einen Man-in-the-Middle-Angriff an einem öffentlichen WLAN-Hotspot.<br>
+    Ein Angreifer fängt die Kommunikation zwischen Nutzer und Ziel-Service ab, liest mit oder verändert Daten und leitet sie weiter.
+  </p>
+
+  <p>
+    Wichtige Bauteile und Bedeutung:<br>
+  </p>
+  <ul>
+    <li>
+      Kunde (blau):<br>
+      <ul>
+      <li>Nutzer mit Laptop/Smartphone, der sich mit einem WLAN verbindet.</li><br>
+      </ul>
+    </li>
+    <li>
+      Öffentlicher WLAN-Hotspot (grau):<br>
+      <ul>
+      <li>Der Access-Point, über den die Verbindung läuft; oft ungesichert oder leicht zu imitieren.</li><br>
+      </ul>
+    </li>
+    <li>
+      Betrüger (rot):<br>
+      Der Angreifer, der als "Man in the Middle" agiert.
+      <ul>
+        <li>Evil Twin / Rogue AP: stellt ein bösartiges WLAN bereit.</li>
+        <li>kann Daten mitschneiden, weiterleiten oder verändern.</li><br>
+      </ul>
+    </li>
+    <li>
+      Ziel-Service (grün):<br>
+      <ul>
+      <li>Der eigentliche Server oder Dienst (z. B. E-Mail, Online-Banking).</li><br>
+      </ul>
+    </li>
+    <li>
+      Kommunikationspfade (Pfeile/ Linien):<br>
+      <ul>
+      <li>Gestrichelter Pfeil: Kunde → Hotspot (Verbindungsaufbau).</li>
+      <li>Schwarze Linie: Weiterleitung/Abgriff.</li>
+      <li>Roter Pfeil: Betrüger leitet weiter & liest mit.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>
+    Ablauf (Schritte):<br>
+    1) Betrüger richtet bösartigen Hotspot ein.<br>
+    2) Kunde verbindet sich (ohne zu prüfen).<br>
+    3) Daten werden abgefangen (z. B. Login, Mails) und ggf. missbraucht.
+  </p>
+
+  <p>
+    Typische Techniken:<br>
+    <ul>
+    <li>Evil Twin<br>
+      <ul>
+      <li>Wie beim Phishing → Der Kunde verbindet sich mit diesem falschen Hotspot - der Betrüger sitzt damit automatisch „in der Mitte“ und kann den gesamten Netzwerkverkehr sehen oder manipulieren.</li>
+      <li>Wie erkennt man es?</li>
+          <ul>
+            <li>Mehrere Netzwerke mit fast identischem Namen erscheinen.</li>
+            <li>Kein Passwort / offenes Netzwerk, obwohl das echte Netzwerk ein Passwort hätte.</li>
+            <li>Der Hotspot fordert seltsame Formulare vor dem Zugriff.</li>
+          </ul><br>
+      </ul>
+    </li>
+    <li>ARP-Spoofing / DNS-Spoofing<br>
+      <ul>
+      <li>Selbst wenn der Kunde scheinbar mit dem richtigen Hotspot verbunden ist, sorgt ARP-Spoofing dafür, dass Pakete über das Gerät des Betrügers gehen - er liest mit oder verändert Daten.<br>
+      Der Kunde ruft z. B. „mail.meinefirma.de“ auf, wird aber zu einer Angreifer-Adresse geleitet. Login-Seiten können identisch aussehen - Daten werden eingegeben und abgegriffen.</li>
+      <li>Wie erkennt man es?</li>
+          <ul>
+            <li>Zertifikat-/HTTPS-Warnungen können auftreten, wenn Inhalte manipuliert werden.</li>
+            <li>Unerwartete Inhalte oder Login-Seiten mit leichtem Unterschied.</li>
+            <li>Unerklärliche Verzögerungen/Verbindungsabbrüche.</li>
+          </ul><br>
+      </ul>
+    </li>
+    <li>SSL-Strip / gefälschte Zertifikate<br>
+      <ul>
+      <li>Der Kunde glaubt eine normale Verbindung zu haben; tatsächlich liest der Angreifer die entschlüsselten Daten aus - Passwörter, Formulardaten, Cookies.</li>
+      <li>Wie erkennt man es?</li>
+          <ul>
+            <li>Browser-Warnungen wegen ungültigem Zertifikat.</li>
+            <li>Kein sichtbares Schloss in der Adressleiste, obwohl erwartet.</li>
+            <li>Unerwartete Redirects von https:// zu http://.</li>
+          </ul><br>
+      </ul>
+    </li>
+      <li>Session-Hijacking (Cookies)<br>
+      <ul>
+      <li>Der Betrüger sammelt Session-Cookies (z. B. durch Abgreifen oder Malware-Injektion) und nutzt sie um ohne Passwort im Konto zu agieren.</li>
+      <li>Wie erkennt man es?</li>
+          <ul>
+            <li>Plötzliche Login-Hinweise / Benachrichtigungen über neue Geräte.</li>
+            <li>Ungewöhnliche Aktivitäten im Konto (E-Mails löschen, Einkäufe).</li>
+          </ul><br>
+      </ul>
+    </li>
+      <li>Malware<br>
+      <ul>
+      <li>Was man nicht ausschließen darf, ist ein Malware-Angriff. Selbst wenn Netzwerkverschlüsselung vorhanden ist, manipuliert die Schadsoftware die Daten vor der Verschlüsselung - der Angreifer sieht alles.</li>
+      <li>Wie erkennt man es?</li>
+          <ul>
+            <li>Unerwartete Popup-Fenster, plötzlich andere Inhalte auf bekannten Seiten.</li>
+            <li>Sicherheitssoftware warnt oder unbekannte Browser-Erweiterungen sind aktiv.</li>
+          </ul><br>
+      </ul>
+    </li>
+    </ul>
+  </p>
+
+  <p>
+    Gefahren:<br>
+    Kontoübernahmen, Finanzbetrug, Identitätsdiebstahl, Malware-Injektion
+  </p>
+        </p>
+        </section>
+          
+      <section id="ddos" class="content-section" aria-labelledby="cyber-schema">
+        <h2>DoS- und DDoS-Angriffe</h2>
+        <p style="font-size:17px;"><i>Protokollbasierte Angriffe</i><br>
+        Wie ein Cyberangriff die Bibliothek stört
+  <div class="diagram-wrapper">
+    <!-- SVG: skalierbar, direkt editierbar -->
+    <svg viewBox="0 0 1100 520" role="img" aria-label="Schema eines Cyberangriffs: Bibliothekssystem wird durch eine Schwachstelle gestört, Besucher können Bücher nicht finden." xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Hintergrund -->
+      <rect width="100%" height="100%" fill="#f6f8fb"/>
+
+      <!-- Bibliothek (links) -->
+      <g transform="translate(40,60)">
+        <rect x="0" y="0" width="260" height="160" rx="12" fill="#ffffff" stroke="#2b6cb0" stroke-width="3"/>
+        <text x="130" y="26" font-size="18" font-weight="700" fill="#2b6cb0" text-anchor="middle">Öffentliche Bibliothek</text>
+        <!-- Bücherregal-Icon -->
+        <g transform="translate(24,44)">
+          <rect x="0" y="0" width="216" height="100" rx="6" fill="#eef6ff"/>
+          <!-- Regalbretter -->
+          <rect x="12" y="12" width="36" height="76" rx="3" fill="#cfe3ff"/>
+          <rect x="60" y="12" width="36" height="76" rx="3" fill="#b6d6ff"/>
+          <rect x="108" y="12" width="36" height="76" rx="3" fill="#9fc7ff"/>
+          <rect x="156" y="12" width="36" height="76" rx="3" fill="#8bbaff"/>
+        </g>
+      </g>
+
+      <!-- Besucher (unten links) -->
+      <g transform="translate(30,240)">
+        <circle cx="60" cy="36" r="18" fill="#ffd28a"/>
+        <rect x="46" y="54" width="28" height="36" rx="6" fill="#ffd28a"/>
+        <text x="120" y="56" font-size="14" fill="#333">Besucher: findet Bücher nicht / kann nicht ausleihen</text>
+      </g>
+
+      <!-- Bibliothekssystem / Terminal (Mitte) -->
+      <g transform="translate(380,70)">
+        <rect x="0" y="0" width="320" height="220" rx="14" fill="#ffffff" stroke="#0ea5a4" stroke-width="3" />
+        <text x="160" y="28" font-size="18" font-weight="700" fill="#0ea5a4" text-anchor="middle">Bibliotheks-Computersystem</text>
+
+        <!-- Monitor -->
+        <g transform="translate(28,48)">
+          <rect x="0" y="0" width="104" height="72" rx="6" fill="#eefcfb" stroke="#8be0db"/>
+          <text x="52" y="36" font-size="12" text-anchor="middle" fill="#066" >Suchindex</text>
+        </g>
+
+        <!-- Server -->
+        <g transform="translate(150,48)">
+          <rect x="0" y="0" width="120" height="88" rx="8" fill="#f0f7ff" stroke="#4f46e5"/>
+          <text x="60" y="24" font-size="12" text-anchor="middle" fill="#333">Datenbank</text>
+          <rect x="22" y="36" width="76" height="12" rx="4" fill="#c7d2fe"/>
+          <rect x="22" y="54" width="76" height="12" rx="4" fill="#c7d2fe"/>
+        </g>
+
+        <!-- Warnsymbol (bei Störung) -->
+        <g id="warning" transform="translate(136,152)">
+          <polygon points="0,44 48,0 96,44 48,88" fill="#fff7f5" stroke="#ef4444" stroke-width="3" filter="url(#glow)"/>
+          <text x="48" y="50" font-size="20" font-weight="700" text-anchor="middle" fill="#ef4444">!</text>
+        </g>
+      </g>
+
+      <!-- Netzwerk/Protokoll (oben rechts) -->
+      <g transform="translate(760,56)">
+        <rect x="0" y="0" width="280" height="140" rx="12" fill="#ffffff" stroke="#7c3aed" stroke-width="3"/>
+        <text x="140" y="26" font-size="16" font-weight="700" fill="#7c3aed" text-anchor="middle">Netzwerk / Protokoll</text>
+        <g transform="translate(24,44)">
+          <ellipse cx="40" cy="34" rx="36" ry="22" fill="#f3e8ff"/>
+          <text x="40" y="38" font-size="12" text-anchor="middle" fill="#4c1d95">Versions-Lücke</text>
+        </g>
+      </g>
+
+      <!-- Angreifer (unten rechts) -->
+      <g transform="translate(760,240)">
+        <rect x="0" y="0" width="220" height="140" rx="12" fill="#fff" stroke="#ef4444" stroke-width="3"/>
+        <text x="110" y="24" font-size="16" font-weight="700" fill="#ef4444" text-anchor="middle">Angreifende Person</text>
+        <!-- Hoodie-Icon -->
+        <g transform="translate(44,46)">
+          <ellipse cx="38" cy="24" rx="28" ry="28" fill="#1f2937"/>
+          <rect x="12" y="44" width="52" height="44" rx="8" fill="#111827"/>
+          <rect x="26" y="16" width="24" height="6" rx="3" fill="#f8fafc"/>
+        </g>
+        <text x="110" y="120" font-size="12" fill="#333" text-anchor="middle">nutzt Schwachstelle im Protokoll aus</text>
+      </g>
+
+      <!-- Pfeile / Angriffsvektor -->
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151"/>
+        </marker>
+      </defs>
+
+      <!-- Besucher -> Bibliothekssystem (grau) -->
+      <path d="M 140 270 C 220 240, 320 210, 380 150" fill="none" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+      <!-- Bibliothekssystem -> Netzwerk (grau) -->
+      <path d="M 700 150 C 740 140, 760 120, 820 120" fill="none" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+      <!-- Angreifer -> Schwachstelle (rote "Blitz"-Störung) -->
+      <g id="attack">
+        <path d="M 650 320 C 700 300, 740 280, 760 240" fill="none" stroke="#ef4444" stroke-width="6" stroke-opacity="0.18"/>
+        <!-- roter Blitz -->
+        <path d="M 720 230 L 695 270 L 725 270 L 695 330 L 760 265 L 720 265 Z"
+              fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" transform="translate(0,-40)" style="filter: url(#glow);"/>
+      </g>
+
+      <!-- Kurzer erklärender Text unten -->
+      <text x="550" y="500" font-size="13" text-anchor="middle" fill="#334155">
+        Erklärung: Ein Angreifer nutzt eine Schwachstelle im Netzwerkprotokoll → das System wird überlastet / gestört →
+        Besucher können keine Bücher finden oder ausleihen.
+      </text>
+    </svg>
+  </div>
+  Das Schema zeigt eine Analogie zwischen einer Bibliothek und einem Cyberangriff auf ein Computersystem.<br>
+Die Idee:<br>
+
+Wenn jemand eine Schwachstelle im System der Bibliothek ausnutzt, kann der Betrieb gestört werden – genauso wie bei einem Cyberangriff auf ein Netzwerk.<br><br>
+<ul>
+<li>1. Öffentliche Bibliothek (links oben, blau)</li>
+
+Symbol: ein rechteckiges Gebäude mit Bücherregalen<br>
+Bedeutung: steht für eine reale Institution oder Organisation – also das Zielsystem, das einen IT-Dienst anbietet.<br>
+In der Analogie: die Bibliothek betreibt ein Computersystem, das Besucher nutzen.<br>
+
+In der Realität: das ist z. B. ein Unternehmen, eine Website oder eine Behörde, die Server betreibt.<br><br>
+
+<li>2. Besucher (unten links)</li>
+
+Symbol: kleine Person mit gelbem Kopf (Besucherfigur)<br>
+Bedeutung: normale Benutzer:innen des Systems, die den Service verwenden wollen.<br>
+
+In der Analogie: Besucher möchten Bücher suchen oder ausleihen.<br>
+In der IT-Welt: Das sind reguläre Nutzer, die etwa Webseiten aufrufen oder E-Mails verschicken.<br><br>
+
+<li>3. Bibliotheks-Computersystem (Mitte, türkis)</li>
+
+Symbol: ein großer Kasten mit Monitor, Datenbank und Warnsymbol<br>
+Bedeutung: das zentrale Computersystem oder der Server, über den alle Anfragen laufen.<br>
+
+In der Analogie: das ist das Programm, das Buchdaten verwaltet.<br>
+In der IT-Welt: das ist der Server oder die Webanwendung, die alle Daten verarbeitet.<br>
+
+Im Inneren sieht man:<br>
+
+📊 Monitor / Suchindex → Suchfunktion, mit der Besucher Bücher finden.<br>
+
+💾 Datenbank → Speicherung der Buchinformationen.<br>
+
+⚠️ Rotes Warnsymbol (mit !) → zeigt an, dass eine Störung oder Überlastung vorliegt.<br><br>
+
+<li>4. Netzwerk / Protokoll (oben rechts, violett)</li>
+
+Symbol: ein Kasten mit einer „Versions-Lücke“ (ellipse-förmiger Bereich)<br>
+Bedeutung: Das Netzwerk, über das Daten übertragen werden oder das Kommunikationsprotokoll (z. B. TCP/IP, HTTP)<br>
+
+In der Analogie: das ist wie der Kommunikationsweg zwischen Bibliothek und Besuchern.<br>
+In der IT-Welt: hier können Sicherheitslücken oder veraltete Protokolle vorkommen, die Angreifer ausnutzen.<br><br>
+
+<li>5. Angreifende Person (unten rechts, rot)</li>
+
+Symbol: dunkle Figur "mit Kapuze" (klassisches Hacker-Symbol)<br>
+Bedeutung: eine Person oder Gruppe, die aktiv versucht, eine Schwachstelle auszunutzen.<br>
+
+Text: „nutzt Schwachstelle im Protokoll aus“<br>
+Das bedeutet: Sie greift das Netzwerk oder die Software gezielt an.<br>
+
+In der IT-Welt: Das kann ein DDoS-Angriff, ein Exploit, Malware oder ein gezielter Netzwerkangriff sein.
+In dem Fall ist es ein DDoS-Angriff oder DoS-Angriff.<br><br>
+
+<li>6. Pfeile und Verbindungslinien</li>
+<ul>
+<li>Graue Pfeile → normale Kommunikation</li>
+
+<ul>→ Besucher → System → Netzwerk</ul>
+
+<ul>→ repräsentiert den regulären Datenfluss</ul>
+
+<li>Roter Blitz & roter Pfeil → Angriff</li>
+
+<ul>→ zeigt den Weg des Angriffs vom Angreifer über die Schwachstelle ins System</ul>
+
+<ul>→ der Blitz symbolisiert die Störung (z. B. Überlastung oder Datenchaos)</ul>
+</ul>
+</ul>
+Das ist quasi die Kurzfassung des Cyberangriffs:<br>
+Angriff → Schwachstelle → Systemstörung → Auswirkungen auf Benutzer</p>
+Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
+      </section>
+
+      <div class="button-container">
+        <a href="methoden.html"><button class="prev-button">&laquo; Methoden</button></a>
+        <a href="schutz.html"><button class="next-button">Schutz &raquo;</button></a>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const sections = document.querySelectorAll('.content-section');
+
+    // Klick-Logik
+    menuItems.forEach(item => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        const sectionId = this.getAttribute('data-section');
+        const target = document.getElementById(sectionId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 100,
+            behavior: 'smooth'
+          });
+
+          // URL aktualisieren ohne Reload
+          history.replaceState(null, '', '#' + sectionId);
+        }
+      });
+    });
+
+    // Scroll-Logik (aktiviert aktuellen Menüpunkt beim Scrollen)
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

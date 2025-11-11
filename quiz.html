@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="Favicon_112x112.jpg">
+  <title>IT-SafeZone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+      background-size: cover;
+      background-position: center;
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+    }
+
+          body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hinter dem Inhalt */
+      }
+
+            .content, footer {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+ padding: 0.25rem 0.75rem !important; /* weniger Höhe */
+  min-height: 58px; /* reduziert Gesamthöhe */
+}
+
+.navbar-brand h2 {
+  font-size: 1.6rem; /* kleinerer Titel */
+  margin: 0; /* kein zusätzlicher Außenabstand */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.nav-link h5 {
+  font-size: 1.05rem; /* kompaktere Links */
+  margin: 0; 
+  line-height: 1.3;
+   font-weight: 500;
+}
+
+.navbar img {
+  max-width: 140px; /* Logo etwas kleiner */
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Mobile: noch kompakter */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  .navbar-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .navbar img {
+    max-width: 120px;
+  }
+
+  .nav-link h5 {
+    font-size: 1rem;
+  }
+}
+
+       .navbar.bg-body-tertiary, footer, .sidebar {
+  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+    .nav-link.active {
+  color: #8cd000;
+}
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-link:hover {
+      color: #8cd000;
+    }
+
+    a:active {
+      text-decoration: underline;
+      color: #8cd000;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f4f4f4;
+      position: fixed;
+      top: 75px;
+      left: 0;
+      height: calc(100vh - 75px);
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
+      transition: all 0.3s;
+    }
+
+    .sidebar ul li.active {
+      background: #ddd;
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
+    }
+
+    .sidebar ul li:hover {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+.offcanvas-body li.nav-link.active a {
+  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
+  background-color: transparent !important; /* Kein Hintergrund */
+}
+
+    .content {
+      margin-left: 250px;
+      margin-top: 75px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .content-section {
+    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
+    margin-bottom: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
+}
+
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
+}
+
+    @media (max-height: 910px) {
+      body {
+        overflow-y: auto;
+      }
+    }
+
+    @media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+}
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+      }
+    }
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+    }
+
+    .previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #8cd000;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* optional Abstand nach außen */
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #8cd000;
+  color: white;
+}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <button class="btn btn-outline-success d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+      ☰
+    </button>
+
+    <!-- Titel links -->
+    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+
+    <!-- ZENTRIERTE LINKS -->
+    <div class="d-none d-lg-flex justify-content-center flex-grow-1">
+      <div class="d-flex gap-4">
+<a href="allgemeines.html" class="nav-link"><h5>ALLGEMEINES</h5></a>
+<a href="methoden.html" class="nav-link"><h5>METHODEN</h5></a>
+<a href="beispiele.html" class="nav-link"><h5>BEISPIELE</h5></a>
+<a href="schutz.html" class="nav-link"><h5>SCHUTZ</h5></a>
+<a href="quiz.html" class="nav-link active"><h5>QUIZ</h5></a>
+      </div>
+    </div>
+
+    <!-- Logo rechts -->
+    <img src="BUG_Logo_Gruppe_RGB.png" alt="BUG Gruppe Logo" class="img-fluid">
+  </div>
+</nav>
+
+    <!-- Sidebar -->
+ <div class="sidebar d-none d-lg-block">
+    <ul>
+      <li class="menu-item active" data-section="Allgemeines">Allgemeines</li>
+      <li class="menu-item" data-section="Malware">Malware</li>
+      <li class="menu-item" data-section="Spam">Spam</li>
+      <li class="menu-item" data-section="Phishing">Phishing</li>
+      <li class="menu-item" data-section="mitm">Man-in-the-Middle-Angriff</li>
+      <li class="menu-item" data-section="ddos">DoS- und DDoS-Angriffe</li>
+      <li class="menu-item" data-section="Beispiele">Beispiele</li>
+      <li class="menu-item" data-section="Schutz">Schutz</li>
+      <li class="menu-item" data-section="Notfälle">Notfälle</li>
+    </ul>
+  </div>
+
+  <!-- Offcanvas Sidebar (Mobile) -->
+  <div class="offcanvas offcanvas-start d-flex flex-column align-items-center text-center" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" aria-label="Schließen"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul>
+        <li class="nav-link"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+        <li class="nav-link"><a href="methoden.html"><h5>METHODEN</h5></a></li>
+        <li class="nav-link"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+        <li class="nav-link"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+        <li class="nav-link active"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <section id="Allgemeines" class="content-section">
+        <h2>Allgemeines</h2><iframe width="100%" height="550px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=j30_mTXVSUG88d8KvoWXNap5pJOkTiFJkiTz4inRvB1UOFo3UTE5QkJNU0xGNVNaVFVOMUM2NlRTUS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe></section>
+
+      <section id="Malware" class="content-section">
+        <h2>Malware</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/4qpDSQ291V?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="Spam" class="content-section">
+        <h2>Spam</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/giVUiHg9HR?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="Phishing" class="content-section">
+        <h2>Phishing</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/KeQ177s0Ut?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="mitm" class="content-section">
+        <h2>Man-in-the-Middle-Angriff</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/086T6ZnBLu?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="ddos" class="content-section">
+        <h2>DoS- und DDoS-Angriffe</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/sDZamDmQv4?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="Beispiele" class="content-section">
+        <h2>Beispiele</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/NTg39H1L49?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="Schutz" class="content-section">
+        <h2>Schutz</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/kgVg1XnE6T?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <section id="Notfälle" class="content-section">
+        <h2>Notfälle</h2>
+        <iframe width="100%" height="550px" src="https://forms.cloud.microsoft/e/QCngtisGuf?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+      </section>
+
+      <div class="button-container">
+        <a href="schutz.html"><button class="prev-button">&laquo; Schutz</button></a>
+        <a href="index.html"><button class="next-button">Startseite &raquo;</button></a>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const sections = document.querySelectorAll('.content-section');
+
+    // Zuerst alles verstecken außer dem ersten
+    sections.forEach((section, index) => {
+      section.style.display = index === 0 ? 'block' : 'none';
+    });
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Sidebar-Styling aktualisieren
+        menuItems.forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        // Abschnitt ermitteln und anzeigen
+        const sectionId = this.getAttribute('data-section');
+        sections.forEach(section => {
+          if (section.id === sectionId) {
+            section.style.display = 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>

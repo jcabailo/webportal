@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Favicon_112x112.jpg">
+    <title>IT-SafeZone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+  
+      body {
+          overflow-x: auto; /* Entfernt horizontales Scrollen */
+          max-width: 100vw; /* Stellt sicher, dass der Body nicht breiter als der Bildschirm ist */
+          background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed; /* Damit der Hintergrund beim Scrollen fix bleibt */
+          color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+      }
+
+      /* Overlay mit 75 % Weiß-Abdeckung */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.75); /* 0.75 = 75% Deckkraft */
+        z-index: -1; /* Hinter dem Inhalt */
+      }
+
+      .card, footer {
+      background-color: rgba(255, 255, 255, 0.75); /* Weiß mit 70 % Deckkraft */
+      }
+
+   .navbar.bg-body-tertiary,
+footer {
+  background-color: rgba(255,255,255,0.75) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+      .container-fluid {
+          max-width: 100%; /* Verhindert, dass das Navbar-Container breiter wird */
+      }
+  
+      .row {
+          display: flex;
+          flex-wrap: wrap; /* Karten umbrechen statt horizontal scrollen */
+          justify-content: center; /* Karten mittig anordnen */
+          margin: 0 auto; /* Verhindert zu breite Abstände */
+          margin-top: 20px; /* Abstand zwischen Text und Karten */
+      }
+  
+      .card {
+          flex: 1 1 300px; /* Karten flexibel anpassen, aber max. 300px */
+          max-width: 300px; /* Verhindert Überbreite */
+      }
+
+      .card:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      html {
+    scroll-behavior: smooth;
+      }
+
+      div {
+    flex: 1; /* Sorgt dafür, dass der Inhalt die gesamte Höhe einnimmt */
+      } 
+
+      @media (max-height: 950px) { /* Falls der Bildschirm kleiner als 950px ist */
+    body {
+        overflow-y: auto; /* Scrollen aktivieren */
+    }
+}
+
+@media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: hidden; /* Keine vertikale Scrollbar */
+    height: 100vh;       /* Volle Höhe des Viewports */
+  }
+}
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
+}
+
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
+}
+
+  </style>
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <h1>IT-SAFEZONE</h1> 
+        <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+      </div>
+    </nav><br>
+    <div style="font-size:17px;"><center>Willkommen bei IT-SafeZone – Ihr Schutz vor Cyberbedrohungen!</center></div><br>
+    <div style="font-size:17px;"><center>Das Thema IT-Sicherheit gewinnt zunehmend an Bedeutung, insbesondere im Hinblick auf die Aspekte Datensicherheit und Datenschutz.
+    Es hat das Potenzial, einer der entscheidenden Wettbewerbsvorteile der Zukunft zu werden.<br> Um dieser Entwicklung Rechnung zu tragen, wurde von der IT-Abteilung im Auftrag des Unternehmens ein Maßnahmenkatalog
+    erarbeitet, der darauf abzielt, das Unternehmen zu stärken. Eine dieser Maßnahmen ist die<br>Einrichtung einer zentralen Informationsstelle, die vorhandene Informationen bündelt und so die Suche des Unternehmens 
+    nach geeigneten Anlaufstellen oder Angeboten <br>im Bereich der IT-Sicherheit erleichtert – sowohl bei präventiven Maßnahmen als auch bei Ernstfällen.</center></div><br>
+    <div style="font-size:18px;"><center>Worüber möchten Sie sich informieren?</center></div>
+    <div class="row justify-content-center" >
+      <div class="card" style="width: 300px; margin: 30px; padding:20px">
+        <img src="https://www.secion.de/assets/images/c/Cyberangriff_auf_Ihr_Unternehmen_So_reagieren_Sie_im_Ernstfall_richtig-5594ede7.jpeg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h4 class="card-title">Allgemeines</h4>
+          <p class="card-text"><p>Cyberangriffe sind gezielte oder automatisierte Versuche, IT-Systeme, Netzwerke oder Daten zu kompromittieren.</p>
+        </div>
+          <a href="allgemeines.html" class="btn btn-primary">Weitere Informationen</a>
+      </div>
+
+      <div class="card" style="width: 300px; margin: 30px; padding:20px">
+        <img src="https://mlfk3cv5yvnx.i.optimole.com/cb:HA53.300ea/w:930/h:485/q:mauto/f:best/https://www.ninjaone.com/wp-content/uploads/elementor/thumbs/N1-0921-Common-Cyberthreats-How-to-Prevent-Them-blog-image-qvjtaq0fhxhzkuuel3xr3mwst5thvoor3jjybjtboy.png" class="card-img-top" alt="..."> 
+        <div class="card-body">
+          <h4 class="card-title">Methoden</h4>
+          <p class="card-text">Cyberangriffe können auf verschiedene Weise erfolgen, je nach Ziel und Vorgehensweise der Angreifer.</p>
+        </div>
+          <a href="methoden.html" class="btn btn-primary">Weitere Informationen</a>
+      </div>
+
+      <div class="card" style="width: 300px; margin: 30px; padding:20px">
+        <img src="https://images.ctfassets.net/63bmaubptoky/vDr5kIrdj1qRmAfYd329sZXilZjp_XDoFvkrmFouu4g/a1bc4ecaf25d050a1889e8bea1cef403/Arten-von-Cyberangriffen-DE-Capterra-Header.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h4 class="card-title">Beispiele</h4>
+          <p class="card-text"><ul>
+            <li>Versand von Rechnungen</li>
+            <li>Ablauf von Konten</li>
+            <li>Fake IT-Support</li>
+            <li>...</li>
+          </ul></p>
+        </div>
+          <a href="beispiele.html" class="btn btn-primary">Weitere Informationen</a>
+      </div>
+      
+      <div class="card" style="width: 300px; margin: 30px; padding:20px">
+        <img src="https://www.versicherungsbote.de/content.4907723.images.wzuvd.cyber-3499455_1920.820x462.jpg" height=135; class="card-img-top" alt="...">
+        <div class="card-body">
+          <h4 class="card-title">Schutz</h4>
+          <p class="card-text">Da Cyberangriffe immer ausgefeilter werden, ist ein umfassender Schutz essenziell. Wichtige Maßnahmen umfassen starke Passwörter, ...</p>
+        </div>
+          <a href="schutz.html" class="btn btn-primary">Weitere Informationen</a>
+      </div>
+
+      <div class="card" style="width: 300px; margin: 30px; padding:20px">
+        <img src="https://mlfk3cv5yvnx.i.optimole.com/cb:HA53.300ea/w:930/h:485/q:mauto/f:best/https://www.ninjaone.com/wp-content/uploads/elementor/thumbs/N1-0921-Common-Cyberthreats-How-to-Prevent-Them-blog-image-qvjtaq0fhxhzkuuel3xr3mwst5thvoor3jjybjtboy.png" class="card-img-top" alt="..."> 
+        <div class="card-body">
+          <h4 class="card-title">Quiz</h4>
+          <p class="card-text">Teste dein Wissen rund um IT-Sicherheit – von Passwortschutz über Phishing bis hin zu sicheren Netzwerken. </p>
+        </div>
+          <a href="quiz.html" class="btn btn-primary">Weitere Informationen</a>
+      </div>
+      <footer class="text-center p-3">
+        <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
+      </footer>
+  </div>
+</body>
+</html>
+

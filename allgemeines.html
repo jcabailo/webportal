@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="Favicon_112x112.jpg">
+  <title>IT-SafeZone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+      background-size: cover;
+      background-position: center;
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+    }
+
+          body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hinter dem Inhalt */
+      }
+
+            .content {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+ padding: 0.25rem 0.75rem !important; /* weniger Höhe */
+  min-height: 58px; /* reduziert Gesamthöhe */
+}
+
+.navbar-brand h2 {
+  font-size: 1.6rem; /* kleinerer Titel */
+  margin: 0; /* kein zusätzlicher Außenabstand */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.nav-link h5 {
+  font-size: 1.05rem; /* kompaktere Links */
+  margin: 0; 
+  line-height: 1.3;
+   font-weight: 500;
+}
+
+.navbar img {
+  max-width: 140px; /* Logo etwas kleiner */
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Mobile: noch kompakter */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  .navbar-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .navbar img {
+    max-width: 120px;
+  }
+
+  .nav-link h5 {
+    font-size: 1rem;
+  }
+}
+
+       .navbar.bg-body-tertiary, footer, .sidebar {
+  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+    .nav-link.active {
+  color: #8cd000;
+}
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-link:hover {
+      color: #8cd000;
+    }
+
+    a:active {
+      text-decoration: underline;
+      color: #8cd000;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f4f4f4;
+      position: fixed;
+      top: 75px;
+      left: 0;
+      height: calc(100vh - 75px);
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
+      transition: all 0.3s;
+    }
+
+    .sidebar ul li.active {
+      background: #ddd;
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
+    }
+
+    .sidebar ul li:hover {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+.offcanvas-body li.nav-link.active a {
+  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
+  background-color: transparent !important; /* Kein Hintergrund */
+}
+
+    .content {
+      margin-left: 250px;
+      margin-top: 75px;
+      padding: 20px;
+      flex: 1;
+      position: relative;
+    }
+
+    .content-section {
+    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
+    margin-bottom: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
+}
+
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
+}
+
+    @media (max-height: 910px) {
+      body {
+        overflow-y: auto;
+      }
+    }
+
+    @media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+}
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+      }
+    }
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+    }
+
+    .previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #8cd000;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* optional Abstand nach außen */
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #8cd000;
+  color: white;
+}
+
+.mytooltip {
+  position: relative; /* Wichtig für die Positionierung des Tooltips */
+  display: inline-block; /* Oder flex/block, je nach Kontext */
+  cursor: help;
+  color:black;
+}
+
+.mytooltip .mytooltiptext {
+  visibility: hidden; /* Standardmäßig versteckt */
+  width: 220px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute; /* Positionierung über dem Element */
+  z-index: 9999;
+  bottom: 100%; /* Positioniert über dem Element */
+  left: 50%;
+  transform: translateX(-50%); /* Zentriert den Tooltip */
+  opacity: 0; /* Standardmäßig transparent */
+  transition: opacity 0.3s; /* Sanfter Übergang */
+}
+
+.mytooltip:hover .mytooltiptext,
+.mytooltip:focus .mytooltiptext {
+  visibility: visible; /* Wird bei Hover sichtbar */
+  opacity: 1; /* Wird vollständig sichtbar */
+} 
+
+.toast {
+  background-color: rgba(255, 255, 255, 0.95) !important; /* Weiß, 85% Deckkraft */
+  backdrop-filter: blur(5px);  /* optional schöner Glas-Effekt */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+a[data-bs-toggle="mytooltip"] {
+  display: inline;       /* nicht block, sondern wirklich inline */
+  white-space: normal;   /* keine erzwungenen Abstände */
+  margin: 0 !important;  /* Sicherheitsnetz: keine Ränder */
+  padding: 0 !important; /* Sicherheitsnetz: kein Innenabstand */
+  line-height: inherit;  /* gleiche Zeilenhöhe wie der Text */
+}
+
+.tooltip.fade {
+  transition: none !important;
+}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <button class="btn btn-outline-success d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+      ☰
+    </button>
+
+    <!-- Titel links -->
+    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+
+    <!-- ZENTRIERTE LINKS -->
+    <div class="d-none d-lg-flex justify-content-center flex-grow-1">
+      <div class="d-flex gap-4">
+<a href="allgemeines.html" class="nav-link active"><h5>ALLGEMEINES</h5></a>
+<a href="methoden.html" class="nav-link"><h5>METHODEN</h5></a>
+<a href="beispiele.html" class="nav-link"><h5>BEISPIELE</h5></a>
+<a href="schutz.html" class="nav-link"><h5>SCHUTZ</h5></a>
+<a href="quiz.html" class="nav-link"><h5>QUIZ</h5></a>
+      </div>
+    </div>
+
+    <!-- Logo rechts -->
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+  </div>
+</nav>
+
+    <!-- Sidebar -->
+ <div class="sidebar d-none d-lg-block">
+    <ul>
+        <li class="menu-item active" data-section="definition">Definition</li>
+        <li class="menu-item" data-section="gründe">Gründe</li>
+        <li class="menu-item" data-section="risiken">Risiken</li>
+        <li class="menu-item" data-section="auswirkungen">Auswirkungen</li>
+    </ul>
+  </div>
+
+  <!-- Offcanvas Sidebar (Mobile) -->
+  <div class="offcanvas offcanvas-start d-flex flex-column align-items-center text-center" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" aria-label="Schließen"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul>
+        <li class="nav-link active"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+        <li class="nav-link"><a href="methoden.html"><h5>METHODEN</h5></a></li>
+        <li class="nav-link"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+        <li class="nav-link"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+        <li class="nav-link"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <section id="definition" class="content-section">
+        <h2>Was ist ein Cyberangriff?</h2>
+        <p style="font-size:17px;">Ein Cyberangriff ist ein Angriff im digitalen Raum. Dabei versuchen Kriminelle, Hacker oder auch staatliche Organisationen Computer, Netzwerke oder digitale Dienste zu stören, zu beschädigen oder zu kontrollieren.
+Stell dir das wie einen Einbruch in ein Haus vor – nur dass hier nicht Türen oder Fenster aufgebrochen werden, sondern Passwörter, Sicherheitslücken oder Schadsoftware genutzt werden, um ins „digitale Haus“ einzudringen.
+Cyberangriffe sind heutzutage allgegenwärtig, da fast alles – von Online-Banking über E-Mail bis hin zu Stromnetzen und Krankenhäusern – mit dem Internet verbunden ist. Schon ein einzelner erfolgreicher Angriff kann großen Schaden verursachen, etwa durch gestohlene Daten, lahmgelegte Systeme oder Erpressung.
+<ul>
+Ein Cyberangriff lässt sich aus verschiedenen Blickwinkeln definieren:<br>
+<ul>
+<li><i>Allgemeinverständlich:</i>
+Ein Cyberangriff ist ein Versuch, digital Schaden anzurichten oder unbefugt an Informationen zu kommen. Angreifer nutzen Tricks, Programme oder Sicherheitslücken, um Kontrolle zu gewinnen.</li><br>
+<li><i>Technisch betrachtet:</i>
+Ein Cyberangriff ist ein sicherheitsrelevantes Ereignis, bei dem Schwachstellen in Hard- oder Software ausgenutzt werden, um die Vertraulichkeit (Geheimhaltung), Integrität (Unversehrtheit) oder Verfügbarkeit (Nutzbarkeit) von IT-Systemen zu verletzen.</li><br>
+<li><i>Rechtlich/organisatorisch:</i>
+In vielen Gesetzen (z. B. im Strafrecht oder in der <a href="https://dsgvo-gesetz.de/art-33-dsgvo/" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="Datenschutz-Grundverordnung" 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">DSGVO</a>) wird ein Cyberangriff als eine unerlaubte Handlung gegen IT-Systeme verstanden, die Daten oder Dienste gefährdet. Dazu zählen z. B. Hacking, Spionage, Sabotage oder Datenmanipulation.</li>
+</ul>
+</ul>
+</p>
+      </section>
+
+      <section id="gründe" class="content-section">
+        <h2>Warum kommt es zu Cyberangriffen?</h2>
+        <p style="font-size:17px;">Cyberangriffe entstehen nicht zufällig. Dahinter stecken klare Motive und Ziele. Angreifer nutzen jede Möglichkeit, um aus technischen Schwachstellen, menschlichen Fehlern oder ungeschützten Systemen einen Vorteil zu ziehen.
+          Hier sind die häufigsten Gründe:<br><br>
+<b>1. Finanzielle Motivation</b><br>
+Am häufigsten geht es schlicht um Geld. Kriminelle setzen dabei gezielt Schadsoftware wie sogenannte Ransomware ein, um ganze IT-Systeme lahmzulegen und danach hohe Geldsummen für deren Freigabe zu verlangen. Besonders kritisch: In vielen Fällen werden dabei sensible Daten gestohlen – etwa Kundendaten, Gesundheitsinformationen oder interne Geschäftsunterlagen – und im sogenannten Darknet zum Verkauf angeboten. Auch gefälschte Webseiten, betrügerische Online-Shops oder Phishing-Mails gehören zu den bewährten Methoden, mit denen Angreifer Geld verdienen wollen. Dabei genügt oft ein einziger Klick eines unvorsichtigen Mitarbeiters, um einem Angreifer den Zugang zum internen Netzwerk zu ermöglichen.<br><br>
+<b>2. Politische und staatliche Interessen</b><br>
+Neben dem finanziellen Antrieb sind politische oder strategische Interessen ein bedeutender Grund für Cyberangriffe. Staaten und staatlich unterstützte Gruppen nutzen Cyberangriffe gezielt zur Spionage, zur Beeinflussung von Meinungen oder gar zur Sabotage. Betroffen sind dabei oft staatliche Einrichtungen, kritische Infrastrukturen wie Energieversorger oder Verkehrssysteme – aber auch Unternehmen, die international tätig sind. Ein bekanntes Beispiel ist die gezielte Manipulation von Wahlen durch Falschinformationen in sozialen Netzwerken oder das Lahmlegen von Webseiten durch sogenannte DDoS-Attacken. Hier geht es weniger um Geld als vielmehr um Macht, Kontrolle und politische Einflussnahme.<br><br>
+<b>3. Hacktivismus</b><br>
+Auch aus dem Bereich des sogenannten Hacktivismus stammen viele Angriffe. Dabei handelt es sich meist um Einzelpersonen oder Gruppen, die mit ihren Taten auf politische, gesellschaftliche oder ökologische Missstände aufmerksam machen wollen. Durch das gezielte Veröffentlichen vertraulicher Dokumente – sogenannte Leaks – oder das digitale Lahmlegen von Webseiten versuchen sie, ein Zeichen zu setzen oder Protest auszudrücken. Für Unternehmen bedeutet das nicht nur einen Imageverlust, sondern in vielen Fällen auch konkrete finanzielle und rechtliche Konsequenzen.<br><br>
+
+<b>4. Persönliche Beweggründe</b><br>
+Nicht zu unterschätzen sind auch Angriffe, die aus persönlichen Gründen erfolgen. Nicht alle Täter sind IT-Profis oder Kriminelle im klassischen Sinne. Manchmal handelt es sich um ehemalige Mitarbeitende, die aus Frust oder Rache das Unternehmen schädigen wollen. Auch gelangweilte oder besonders ehrgeizige Personen versuchen sich an IT-Systemen, um sich selbst zu beweisen oder aus reinem Interesse „auszuprobieren“, wie weit sie kommen. In diesen Fällen kann schon ein simpler Zugang – etwa durch ein bekanntes Passwort oder ungesicherte Schnittstellen – ausreichen, um erheblichen Schaden anzurichten.<br><br>
+
+<b>5. Technische Möglichkeiten und menschliche Fehler</b><br>
+Schließlich ist ein sehr häufiger Grund für erfolgreiche Angriffe die Kombination aus technischen Schwächen und menschlichen Fehlern. Veraltete Software, fehlende Sicherheitsupdates oder schlecht konfigurierte Firewalls machen es Angreifern leicht, Systeme zu durchdringen. Gleichzeitig bleibt der Mensch oft das schwächste Glied in der Sicherheitskette: Ein unachtsamer Klick auf eine scheinbar harmlose E-Mail, die Eingabe eines Passworts auf einer gefälschten Login-Seite oder das Öffnen eines infizierten Anhangs – all das reicht aus, um Angreifern Zugang zu sensiblen Informationen oder sogar zu ganzen Netzwerken zu verschaffen.
+Ein typisches Beispiel aus der Praxis: Ein Mitarbeiter erhält eine täuschend echt gestaltete E-Mail, die aussieht, als käme sie von der eigenen IT-Abteilung. Darin wird er gebeten, dringend sein Passwort zurückzusetzen – über einen bereitgestellten Link. Kaum hat er das Formular ausgefüllt, sind die Zugangsdaten in den Händen von Kriminellen – und das Firmennetz ist kompromittiert.
+      </section>
+      <section id="risiken" class="content-section">
+        <h2>Was kann bei einem Cyberangriff passieren?</h2>
+        <p style="font-size:17px;">Die Folgen eines Cyberangriffs sind vielfältig und reichen von kurzfristigen Störungen bis hin zu langfristigen, existenzbedrohenden Schäden.<br>
+
+Ein besonders gravierendes Risiko ist der <b>Datenverlust</b>. Vertrauliche Informationen wie Kundendaten, Geschäftsgeheimnisse oder Zugangsdaten können gestohlen oder unwiederbringlich gelöscht werden. Für Unternehmen bedeutet dies nicht nur den Verlust von Wettbewerbsvorteilen, sondern oft auch Verstöße gegen Datenschutzgesetze.<br>
+
+Ein weiteres Szenario sind <b>Betriebsunterbrechungen</b>. Werden zentrale Systeme verschlüsselt oder lahmgelegt, können Mitarbeiter nicht mehr arbeiten, Produktionslinien stehen still und Lieferketten geraten ins Stocken. Schon wenige Stunden Ausfall können enorme wirtschaftliche Schäden verursachen.<br>
+
+Damit verbunden sind <b>finanzielle Verluste</b>. Neben direkten Lösegeldforderungen entstehen Kosten für IT-Forensik, Wiederherstellung, Rechtsberatung und den Ausfall des Geschäftsbetriebs. Hinzu kommen <b>Reputationsschäden</b>, die das Vertrauen von Kunden, Partnern und Investoren nachhaltig beeinträchtigen können.<br>
+
+Auch <b>rechtliche Konsequenzen</b> sind möglich. Datenschutzverletzungen müssen gemeldet werden und können hohe Bußgelder nach sich ziehen. Zudem können betroffene Kunden oder Geschäftspartner Schadenersatz fordern.<br>
+
+Besonders kritisch sind Angriffe auf <b>lebenswichtige Infrastrukturen</b> wie Krankenhäuser, Energieversorger oder den Verkehr. Hier stehen nicht nur wirtschaftliche Interessen, sondern auch die Sicherheit und Gesundheit der Bevölkerung auf dem Spiel.
+      </section>
+
+      <section id="auswirkungen" class="content-section">
+        <h2>Welche Auswirkungen haben Cyberangriffe?</h2>
+        <p style="font-size:17px;">Häufig werden keine Schutzmaßnahmen ergriffen, da in vielen mittelständischen Betrieben entsprechende Maßnahmen nicht umgesetzt werden.
+          Das erforderliche Fachwissen ist nicht vorhanden. Die Bedrohungslage wird von den verantwortlichen Instanzen nicht adäquat erkannt, was zur Konsequenz hat, dass notwendige Investitionen in die IT-Sicherheit ausbleiben.<br>  
+Die potenziellen Auswirkungen eines Angriffs auf ein Unternehmen sind auch im 
+Kontext des bisherigen Umgangs von kleinen und mittelständischen Unternehmen 
+mit dem Thema Cybersicherheit von entscheidender Bedeutung.<br>
+<b>Wirtschaftlich</b> verursachen sie enorme Kosten – durch Lösegeldforderungen, Umsatzeinbußen und die Wiederherstellung beschädigter Systeme. Studien zeigen, dass ein einziger erfolgreicher Angriff Schäden in Millionenhöhe anrichten kann.<br>
+<b>Betrieblich</b> führt ein Angriff zu erheblichen Einschränkungen. Prozesse werden gestört, Produktionsanlagen stehen still, Lieferketten brechen ab. Je stärker ein Unternehmen digital vernetzt ist, desto größer die potenziellen Folgen.<br>
+<b>Rechtlich</b> sind Unternehmen verpflichtet, Datenschutzverletzungen zu melden und für entstandene Schäden einzustehen. Bußgelder und Schadenersatzforderungen können eine erhebliche zusätzliche Belastung darstellen.<br>
+<b>Reputativ</b> trifft ein Cyberangriff das Vertrauen von Kunden, Partnern und Investoren. Negative Schlagzeilen und der Verlust von Geschäftspartnern können sich langfristig auf die Marktposition auswirken.<br>
+Schließlich gibt es auch <b>gesellschaftliche Auswirkungen</b>. Angriffe auf kritische Infrastrukturen betreffen nicht nur einzelne Unternehmen, sondern ganze Regionen oder sogar Länder. In solchen Fällen geht es nicht mehr nur um Wirtschaftsschäden, sondern um die Aufrechterhaltung der öffentlichen Sicherheit.</p>
+      </section>
+<br><br><br><br><br><br><br><br><br>
+      <div class="button-container">
+        <a href="index.html"><button class="prev-button">&laquo; Startseite</button></a>
+        <a href="methoden.html"><button class="next-button">Methoden &raquo;</button></a>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const sections = document.querySelectorAll('.content-section');
+
+    // Klick-Logik
+    menuItems.forEach(item => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        const sectionId = this.getAttribute('data-section');
+        const target = document.getElementById(sectionId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 100,
+            behavior: 'smooth'
+          });
+
+        }
+      });
+    });
+
+    // Scroll-Logik (aktiviert aktuellen Menüpunkt beim Scrollen)
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.add('active');
+        }
+      });
+    });
+  });
+
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+  // 1) Init: Tooltips nur per Hover (kein Klick/Focus)
+  const tooltipTriggers = Array.from(document.querySelectorAll('[data-bs-toggle="mytooltip"]'));
+  tooltipTriggers.forEach(el => {
+    // trigger: 'hover' verhindert, dass Fokus/click das Tooltip wieder aufweckt
+    new bootstrap.Tooltip(el, { trigger: 'hover', placement: 'top' });
+  });
+
+  // Hilfsfunktion: alle Bootstraps-Tooltips verstecken / entfernen
+  function hideAllTooltips() {
+    tooltipTriggers.forEach(el => {
+      const inst = bootstrap.Tooltip.getInstance(el);
+      if (inst) {
+        try {
+          inst.hide(); // ausblenden
+          // inst.dispose(); // falls du Instanzen komplett entfernen willst
+        } catch (e) { /* ignore */ }
+      }
+    });
+
+    // Entferne evtl. noch sichtbare tooltip DOM-Nodes (Bootstrap hängt Tooltip-Anzeige oft an <body>)
+    document.querySelectorAll('body > .mytooltip').forEach(node => {
+      // sichere Entfernung wenn noch sichtbar/verwaist
+      if (node.classList.contains('show')) {
+        node.classList.remove('show');
+      }
+      // optional: node.remove();
+    });
+  }
+
+  // 2) Beim Klick auf einen Tooltip-Link sofort alle Tooltips verbergen
+  // (wichtig z. B. wenn target="_blank" verwendet wird — original Seite bleibt dann offen)
+  tooltipTriggers.forEach(el => {
+    el.addEventListener('click', (ev) => {
+      hideAllTooltips();
+      // wenn du eine SPA-Navigation machst: call hideAllTooltips() vor pushState/replaceState
+    });
+  });
+
+  // 3) Klick irgendwo anders -> schließen
+  document.addEventListener('click', (ev) => {
+    if (!ev.target.closest('[data-bs-toggle="mytooltip"]')) {
+      hideAllTooltips();
+    }
+  }, true);
+
+  // 4) Wenn die Seite in den Hintergrund geht (neuer Tab), verstecke Tooltips
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) hideAllTooltips();
+  });
+
+  // 5) Bei Unload (zusätzlich)
+  window.addEventListener('beforeunload', hideAllTooltips);
+});
+</script>
+</body>
+</html>

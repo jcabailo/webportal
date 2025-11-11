@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="Favicon_112x112.jpg">
+  <title>IT-SafeZone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+      background-size: cover;
+      background-position: center;
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+    }
+
+          body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hinter dem Inhalt */
+      }
+
+            .content, footer {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+ padding: 0.25rem 0.75rem !important; /* weniger Höhe */
+  min-height: 58px; /* reduziert Gesamthöhe */
+}
+
+.navbar-brand h2 {
+  font-size: 1.6rem; /* kleinerer Titel */
+  margin: 0; /* kein zusätzlicher Außenabstand */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.nav-link h5 {
+  font-size: 1.05rem; /* kompaktere Links */
+  margin: 0; 
+  line-height: 1.3;
+   font-weight: 500;
+}
+
+.navbar img {
+  max-width: 140px; /* Logo etwas kleiner */
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Mobile: noch kompakter */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  .navbar-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .navbar img {
+    max-width: 120px;
+  }
+
+  .nav-link h5 {
+    font-size: 1rem;
+  }
+}
+
+       .navbar.bg-body-tertiary, footer, .sidebar {
+  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+    .nav-link.active {
+  color: #8cd000;
+}
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-link:hover {
+      color: #8cd000;
+    }
+
+    a:active {
+      text-decoration: underline;
+      color: #8cd000;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f4f4f4;
+      position: fixed;
+      top: 75px;
+      left: 0;
+      height: calc(100vh - 75px);
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
+      transition: all 0.3s;
+    }
+
+    .sidebar ul li.active {
+      background: #ddd;
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
+    }
+
+    .sidebar ul li:hover {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+.offcanvas-body li.nav-link.active a {
+  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
+  background-color: transparent !important; /* Kein Hintergrund */
+}
+
+    .content {
+      margin-left: 250px;
+      margin-top: 75px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .content-section {
+    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
+    margin-bottom: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
+}
+
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
+}
+
+    @media (max-height: 910px) {
+      body {
+        overflow-y: auto;
+      }
+    }
+
+    @media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+}
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+      }
+    }
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+    }
+
+    .previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #8cd000;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* optional Abstand nach außen */
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #8cd000;
+  color: white;
+}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <button class="btn btn-outline-success d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+      ☰
+    </button>
+
+    <!-- Titel links -->
+    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+
+    <!-- ZENTRIERTE LINKS -->
+    <div class="d-none d-lg-flex justify-content-center flex-grow-1">
+      <div class="d-flex gap-4">
+<a href="allgemeines.html" class="nav-link"><h5>ALLGEMEINES</h5></a>
+<a href="methoden.html" class="nav-link"><h5>METHODEN</h5></a>
+<a href="beispiele.html" class="nav-link"><h5>BEISPIELE</h5></a>
+<a href="schutz.html" class="nav-link active"><h5>SCHUTZ</h5></a>
+<a href="quiz.html" class="nav-link"><h5>QUIZ</h5></a>
+      </div>
+    </div>
+
+    <!-- Logo rechts -->
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+  </div>
+</nav>
+
+    <!-- Sidebar -->
+ <div class="sidebar d-none d-lg-block">
+    <ul>
+      <li class="menu-item active" data-section="Wie schützt man sich vor?">Wie schützt man sich vor?</li>
+      <li class="menu-item" data-section="Organisatorische Maßnahmen">Organisatorische Maßnahmen</li>
+      <li class="menu-item" data-section="Technische Maßnahmen">Technische Maßnahmen</li>
+      <li class="menu-item" data-section="Notfälle">Notfälle</li>
+    </ul>
+  </div>
+
+  <!-- Offcanvas Sidebar (Mobile) -->
+  <div class="offcanvas offcanvas-start d-flex flex-column align-items-center text-center" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" aria-label="Schließen"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul>
+        <li class="nav-link"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+        <li class="nav-link"><a href="methoden.html"><h5>METHODEN</h5></a></li>
+        <li class="nav-link"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+        <li class="nav-link active"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+        <li class="nav-link"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <section id="Wie schützt man sich vor?" class="content-section">
+        <h2>Wie schützt man sich vor?</h2>
+        <p style="font-size:17px;">Die Minimierung von IT-Risiken sowie die Gewährleistung von IT-Sicherheit erfordern die Umsetzung sowohl technischer als auch organisatorischer Maßnahmen seitens des Unternehmens. Ein Unternehmen, das keine klaren und durchdachten Sicherheitsrichtlinien und -verfahren etabliert hat, riskiert erhebliche finanzielle Verluste, den Verlust von Daten und einen Imageschaden.<br>
+        Um sich wirksam gegen Cyberangriffe zu schützen, ist es wichtig, dass alle Mitarbeitenden die möglichen Gefahren kennen – dazu gehören unter anderem Schadsoftware (Malware), betrügerische E-Mails, Manipulationsversuche (Social Engineering) oder Angriffe auf Netzwerke und Passwörter. Nur wer die Risiken versteht, kann im Arbeitsalltag sicher mit IT-Systemen umgehen und im Ernstfall richtig reagieren.<br>
+        Ein erster wichtiger Schritt besteht darin, Schwachstellen im eigenen Arbeitsumfeld zu erkennen. Das betrifft nicht nur die Technik, sondern auch die täglichen Abläufe und das eigene Verhalten im Umgang mit digitalen Systemen. z. B. Darauf achten , wie man mit sensiblen Daten umgeht, welche E-Mails man öffnet oder welche Passwörter man verwendet.<br>
+        Auf Basis solcher Analysen entwickelt das Unternehmen konkrete Sicherheitsrichtlinien und Schutzmaßnahmen. Diese sollen den Mitarbeitern dabei helfen, sich sicher im digitalen Raum zu bewegen – ob beim Umgang mit E-Mails, bei der Nutzung von Webdiensten oder beim Zugriff auf interne Daten. Dazu gehören klare Regeln für den Umgang mit verdächtigen Nachrichten, Dateien und Links sowie Hinweise zur sicheren Nutzung der IT-Infrastruktur.</p>
+      </section>
+
+      <section id="Organisatorische Maßnahmen" class="content-section">
+        <h2>Organisatorische Maßnahmen</h2>
+        <p style="font-size:17px;">Die Schulung von Mitarbeitenden zählt zu den wirkungsvollsten Maßnahmen, um Cyberangriffen wie Phishing, Social Engineering oder Malware-Angriffen vorzubeugen. Solche Schulungen finden in der Regel in Form von Informationsveranstaltungen oder interaktiven Trainings statt. Dabei werden aktuelle Angriffsmethoden vorgestellt, typische Anzeichen für Bedrohungen erläutert und praxisnahe Verhaltensweisen für den Ernstfall vermittelt.<br>
+        Die Wirksamkeit von Sicherheitsrichtlinien hängt maßgeblich davon ab, ob Mitarbeitende die Inhalte nachvollziehen können und bereit sind, diese in den Arbeitsalltag zu integrieren. Daher spielt neben der technischen Umsetzung auch die kontinuierliche Sensibilisierung eine zentrale Rolle.<br>
+        Ergänzend zu Schulungen können auch simulierte Cyberangriffe – beispielsweise Phishing-Tests – eingesetzt werden. Sie dienen dazu, das Sicherheitsbewusstsein zu stärken, den Umgang mit verdächtigen Situationen zu üben und mögliche Schwachstellen frühzeitig zu erkennen.<br>
+        Die Entwicklung von Cyber-Bedrohungen erfolgt permanent. Die Vorgehensweisen der Angreifer unterliegen einem ständigen Wandel. Daher ist es von essenzieller Bedeutung, die Sicherheitsrichtlinien in regelmäßigen Abständen zu überprüfen und gegebenenfalls anzupassen, um neue Gefahren zu berücksichtigen. Im Rahmen des stetigen Verbesserungsprozesses sollten auch Mitarbeitenden-Feedback sowie vergangene Vorfälle berücksichtigt werden.
+           </p>
+      </section>
+
+      <section id="Technische Maßnahmen" class="content-section">
+        <h2>Technische Maßnahmen</h2>
+        <p style="font-size:17px;">Zusätzlich zu den Schulungen wird die Implementierung von technischen Sicherheitsmaßnahmen empfohlen. Diesbezüglich sei auf die potenzielle Nutzung von Spam-Filtern, Anti-Phishing-Tools, E-Mail-Verschlüsselung sowie die Implementierung von Multi-Faktor-Authentifizierung (MFA) verwiesen. MFA verbindet ein dem Nutzer bekanntes Element (beispielsweise ein Passwort) mit einem Element, das der Nutzer bei sich trägt (beispielsweise eine Smartphone-
+        Applikation). Dadurch wird der unbefugte Zugriff erheblich erschwert, selbst im Falle des Diebstahls der Zugangsdaten.<br> Die implementierten Maßnahmen dienen der Prävention potenzieller Gefahren, die von verdächtigen E-Mails ausgehen, indem deren Zugang zum Posteingang der Mitarbeiter:innen unterbunden wird, bevor diese die Möglichkeit haben, sie zu öffnen.<br>
+        Im Folgenden werden ergänzende Maßnahmen dargestellt, die dazu beitragen, den Schutz vor Cyberangriffen zu verbessern und potenzielle Sicherheitsrisiken zu minimieren.<br><br>
+        <b>Verschlüsselung:</b><br>
+        Eine starke End-to-End-Verschlüsselung stellt eine grundlegende Voraussetzung für die Netzwerksicherheit dar. Durch die Verschlüsselung des gesamten Netzwerkverkehrs sowie sämtlicher Ressourcen – einschließlich E-Mail-Inhalte, DNS-Einträge, Messaging-Anwendungen und Access Points – kann verhindert werden, dass unbefugte Dritte Daten abfangen oder manipulieren.<br><br>
+        <b>Sichere Netzwerkverbindungen: </b><br>
+        Man sollte öffentliche WLAN-Netzwerke vermeiden, insbesondere bei der Übertragung sensibler Daten. Die Nutzung eines virtuellen privaten Netzwerks (VPN) bietet zusätzlichen Schutz, da der gesamte Datenverkehr verschlüsselt wird. Dadurch bleiben vertrauliche Informationen, wie Anmelde- oder Kontodaten, selbst im Falle eines Datenabgriffs unlesbar.<br><br>
+        <b>HTTPS und Sicherheitszertifikate: </b> <br>
+        Beim Aufrufen von Webseiten sollte stets auf eine gesicherte Verbindung geachtet werden. Diese ist an der Kennzeichnung „https://“ sowie am Schlosssymbol in der Adresszeile des Browsers erkennbar. Unverschlüsselte Seiten sollten grundsätzlich gemieden werden. SSL- und TLS-Protokolle schützen zusätzlich Anwendungen vor bösartigem Webverkehr und verhindern Spoofing-Angriffe.
+        <center><img src="https.png" width="40%" height="40%"><img src="https2.png" width="18%" height="18%"></center><br><br>
+        <b>Softwarequellen: </b><br>
+        Software sollte ausschließlich aus vertrauenswürdigen und offiziellen Quellen heruntergeladen werden, beispielsweise direkt von den Webseiten der Anbieter oder aus offiziellen App-Stores. Über inoffizielle Downloadportale kann unbemerkt Schadsoftware auf das System gelangen.<br><br>
+        <b>Umgang mit E-Mails und Nachrichten: </b> <br>
+        E-Mails und Nachrichten sollten immer mit besonderer Achtsamkeit behandelt werden, da sie oft als Eintrittspunkt für Cyberangriffe genutzt werden. Es sollte grundsätzlich vermieden werden, Links in E-Mails oder Textnachrichten anzuklicken oder verdächtige Anhänge zu öffnen. Selbst Nachrichten, die vertrauenswürdig erscheinen, können Schadsoftware enthalten. Im Zweifelsfall empfiehlt es sich, die Echtheit der Nachricht über einen anderen Kommunikationsweg zu überprüfen. 
+        Um sich zu schützen, sollten eingehende Mahnungen oder Zahlungsaufforderungen stets sorgfältig geprüft und Absenderadressen hinterfragt werden. Vor einer Reaktion, etwa einer Zahlung oder dem Anklicken eines Links, ist es ratsam, sich direkt beim angeblichen Unternehmen zu vergewissern.<br> Verdächtige Nachrichten sollten aus dem Posteingang gelöscht und über die entsprechenden Funktionen, beispielsweise in Outlook, als Phishing- oder Spam-Mails gemeldet werden.
+        <center><img src="mail.png" width="70%" height="70%"></center>
+        Grundsätzlich ist eine gesunde Skepsis gegenüber unerwarteten oder ungewöhnlichen Nachrichten empfehlenswert. Bei der Prüfung verdächtiger E-Mails sollte man insbesondere auf folgende Aspekte achten: Die Absenderadresse ist genau zu überprüfen – nicht nur der Name, sondern auch die Domain, da betrügerische Absender häufig täuschend echte Adressen mit kleinen Abweichungen nutzen (z. B. suport.microsoft.com statt support.microsoft.com).<br><br>
+        <i><b>Kleiner Tipp:</b></i> Links sollten vor dem Anklicken geprüft werden, indem man mit dem Mauszeiger darüberfährt, um die tatsächliche Zieladresse zu sehen. Weicht diese von der offiziellen Firmenwebsite ab oder handelt es sich um auffällige URLs, wie gefälschte Domains, gekürzte Links oder numerische IP-Adressen, ist höchste Vorsicht geboten.<br> Auch die Sprache und der Stil einer Nachricht sollten kritisch bewertet werden, da ungewohnte Formulierungen, Rechtschreibfehler oder der Aufbau von Druck häufig auf betrügerische Absichten hinweisen.<br><br>
+        Darüber hinaus ist es wichtig, auf Handlungsaufforderungen in verdächtigen Nachrichten nicht zu reagieren. Häufig versuchen Cyberkriminelle, durch Zeitdruck oder Drohungen zu unüberlegtem Handeln zu bewegen. Man sollte in solchen Fällen Ruhe bewahren und die Echtheit der Nachricht prüfen, bevor Maßnahmen ergriffen werden. Ebenso gilt, dass seriöse Unternehmen niemals per E-Mail nach Passwörtern, PINs oder anderen vertraulichen Informationen fragen. Solche Daten sollten grundsätzlich nicht weitergegeben werden, um den Missbrauch sensibler Zugangsdaten zu verhindern.<br>
+        Zur Verifizierung empfiehlt es sich, die offizielle Website des vermeintlichen Absenders direkt aufzurufen und die dort angegebenen Kontaktinformationen zu nutzen, anstatt auf Daten aus der E-Mail zu vertrauen. Im Falle von Rechnungen oder Mahnungen sollte im Kundenportal des Unternehmens überprüft oder telefonisch nachgefragt werden, ob die Nachricht echt ist.<br>Bei eindeutig verdächtigen Fällen ist die IT-Abteilung zu informieren oder die Nachricht umgehend zu löschen.<br><br>
+        <b>Anmeldeversuche/Login-Seiten: </b> <br>
+        Sollte eine Anmeldung erforderlich sein, so ist diese ausschließlich über die offizielle Firmenwebsite vorzunehmen (beispielsweise über das Kundenportal mit Login).<br>
+        Die offizielle Login-Seite von Microsoft lautet immer: https://login.microsoftonline.com.<br>
+        <b>Hinweis:</b> Keine Weiterleitung auf unbekannte Login-Seiten oder externe Plattformen. <b>Immer https://login.microsoftonline.com</b>.<br><br>
+        <center><img src="reallogin.png" width="50%" height="50%"></center><br>
+        <center><img src="realloginlink.png" width="50%" height="50%"></center><br>
+        Im Zuge der Anmeldung mit dem Unternehmenskonto erfolgt eine Umleitung auf die Unternehmensseite, sodass eine Verifizierung der Identität des Anmeldenden und die Bestätigung der Zugehörigkeit zum Unternehmen möglich ist. Infolgedessen wird das Hintergrundbild der Seite automatisch auf das Logo des Unternehmens aktualisiert.<br><br>
+        <center><img src="firmalogin.png" width="50%" height="50%"></center><br>
+        Hier ist erkennbar, dass der Mitarbeiter der IT-Abteilung sich anmelden wollte und direkt auf die Unternehmensseite weitergeleitet wurde. Das Logo des Unternehmens sowie die Begrüßung "Willkommen bei der BUG Unternehmensgruppe" weisen darauf hin. Dies gilt grundsätzlich für alle Unternehmen, jedoch unter Verwendung ihres Logos und ihrer Grußformel.<br>
+        <b>Wenn kein Logo angezeigt wird, ist unbedingt Vorsicht geboten und es dürfen auf keinen Fall Daten weitergegeben werden!</b>
+
+        <br><br>
+        <b>Pop-up-Warnungen: </b> <br>
+        Auf Pop-up-Anzeigen, die vor angeblichen Systemproblemen warnen oder dazu auffordern, Programme herunterzuladen, sollte nicht reagiert werden. Solche Meldungen dienen häufig der Verbreitung von Schadsoftware. <br><br>
+        <b>Antivirus- und Anti-Malware-Schutz: </b> <br>
+        Aktuelle Antivirus- und Anti-Malware-Programme leisten einen wichtigen Beitrag zur Systemsicherheit. Durch regelmäßige Updates und Scans kann potenzielle Schadsoftware frühzeitig erkannt und entfernt werden. Dennoch ersetzt solche Software kein sicheres und umsichtiges Verhalten im digitalen Raum. <br><br>
+        <b>Datensicherung (Back-up): </b><br>
+        Regelmäßige Back-ups sind unerlässlich, um im Falle eines Cyberangriffs oder Systemausfalls den Zugriff auf wichtige Daten sicherzustellen. Dadurch kann der Datenverlust auf ein Minimum reduziert werden. <br><br>
+        <b>Multi-Faktor-Authentifizierung: </b> <br>
+        Die Nutzung von Zwei- oder Multi-Faktor-Authentifizierung erhöht die Sicherheit beim Zugriff auf Unternehmenssysteme deutlich. Sie erschwert den unbefugten Zugriff, selbst wenn Zugangsdaten kompromittiert wurden. <br><br>
+        <b>Netzwerk- und Zugriffsschutz: </b> <br>
+        Technische Maßnahmen wie Ratenbegrenzung, IP-Filterung und Geoblocking tragen dazu bei, den Datenverkehr zu kontrollieren und verdächtige Aktivitäten zu blockieren. Dadurch können Angriffe frühzeitig erkannt und abgewehrt werden. <br><br>
+        <b>Aktualität und Sensibilisierung: </b> <br>
+        Man sollte sich regelmäßig über aktuelle Entwicklungen im Bereich der Cyberkriminalität informieren. Durch Schulungen und Sensibilisierung kann das Sicherheitsbewusstsein gestärkt und die Reaktionsfähigkeit bei potenziellen Bedrohungen verbessert werden.
+
+      </section>
+
+            <section id="Notfälle" class="content-section">
+        <h2>Notfälle</h2>
+        <p style="font-size:17px;">Trotz umfangreicher Sicherheitsmaßnahmen lässt sich das Risiko eines erfolgreichen Cyberangriffs nie vollständig ausschließen.
+        Deshalb ist es umso wichtiger, im Ernstfall vorbereitet zu sein und genau zu wissen, wie man reagieren sollte. Ein klar definierter Notfallplan hilft, vom ersten Verdacht bis zur Wiederherstellung des Normalbetriebs strukturiert vorzugehen.<br><br>
+        <b>Schnelle Meldung verdächtiger Aktivitäten</b><br>
+      Ein zentraler Bestandteil der Notfallreaktion ist, dass Mitarbeitende verdächtige Aktivitäten oder sicherheitsrelevante Vorfälle sofort melden können. Hierfür sind eindeutige Meldewege (z.B. per Ticketsystem) und Ansprechpartner definiert – über die IT-Abteilung.
+      Eine schnelle Meldung kann entscheidend sein, um mögliche Schäden zu begrenzen oder sogar ganz zu verhindern. Im Ernstfall wählen Sie bitte direkt die Notfallnummer: <b>+49 30 818700912</b>, um unverzüglich Unterstützung zu erhalten.<br><br>
+        <b>Wie Sie verdächtiges Verhalten erkennen und darauf reagieren</b><br>
+      Auffälligkeiten können sich auf verschiedene Weise zeigen: ungewöhnliches Systemverhalten, verdächtige E-Mails, unbekannte Dateien oder unautorisierte Zugriffe. Treten solche Anzeichen auf, melden Sie den Vorfall umgehend und dokumentieren Sie die Beobachtungen.
+      Offensichtliche Täuschungsversuche oder potenziell gefährliche Dateien sollten vorsichtig gelöscht werden – im Zweifel gilt: lieber löschen als unbedacht darauf klicken. Diese Grundregel gilt sowohl am Arbeitsplatz als auch im privaten Umfeld.<br><br>
+        <b>Überprüfung von Zugängen und Passwörtern</b><br>
+      Nach einem Vorfall empfiehlt es sich, alle genutzten Zugänge sorgfältig zu überprüfen. Sollten Anzeichen bestehen, dass Zugangsdaten kompromittiert wurden, müssen sämtliche Passwörter sofort geändert werden – nicht nur für den betroffenen Dienst,
+      sondern auch für andere Konten, bei denen ähnliche oder identische Daten verwendet werden. Die Wiederverwendung von Passwörtern stellt ein erhebliches Sicherheitsrisiko dar, da bereits der Zugriff auf einen einzigen Dienst Cyberkriminellen weitreichende Möglichkeiten eröffnen kann.<br><br>
+        <b>Systeme auf Schadsoftware prüfen</b><br>
+      Zusätzlich sollte das betroffene System auf Schadsoftware untersucht werden. Hierbei ist der Einsatz aktueller Sicherheitslösungen besonders wichtig, die über klassischen Virenschutz hinaus Funktionen wie Verhaltenserkennung, Echtzeitschutz und sicheren Internetzugang bieten.
+      So kann sichergestellt werden, dass mögliche Infektionen frühzeitig erkannt und beseitigt werden.<br><br>
+        <b>Zusammengefasst</b><br>
+      Im Notfall gilt: schnell handeln, Meldungen über die Notfallnummer +49 30 818700912 tätigen, verdächtige Inhalte vorsichtig behandeln, alle Zugänge prüfen und Passwörter ändern sowie Systeme auf Schadsoftware untersuchen.
+      Wer diese Schritte kennt und befolgt, trägt maßgeblich dazu bei, Schäden zu minimieren und den normalen Betrieb schnell wiederherzustellen.</p>
+      </section>
+<br>
+      <div class="button-container">
+        <a href="Beispiele"><button class="prev-button">&laquo; Beispiele</button></a>
+        <a href="quiz.html"><button class="next-button">Quiz &raquo;</button></a>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const sections = document.querySelectorAll('.content-section');
+
+    // Klick-Logik
+    menuItems.forEach(item => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        const sectionId = this.getAttribute('data-section');
+        const target = document.getElementById(sectionId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 100,
+            behavior: 'smooth'
+          });
+
+        }
+      });
+    });
+
+    // Scroll-Logik (aktiviert aktuellen Menüpunkt beim Scrollen)
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

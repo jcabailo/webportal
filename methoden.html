@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="Favicon_112x112.jpg">
+  <title>IT-SafeZone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+      background-size: cover;
+      background-position: center;
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+    }
+
+          body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hinter dem Inhalt */
+      }
+
+            .content, footer {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      }
+      
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+ padding: 0.25rem 0.75rem !important; /* weniger Höhe */
+  min-height: 58px; /* reduziert Gesamthöhe */
+}
+
+.navbar-brand h2 {
+  font-size: 1.6rem; /* kleinerer Titel */
+  margin: 0; /* kein zusätzlicher Außenabstand */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.nav-link h5 {
+  font-size: 1.05rem; /* kompaktere Links */
+  margin: 0; 
+  line-height: 1.3;
+   font-weight: 500;
+}
+
+.navbar img {
+  max-width: 140px; /* Logo etwas kleiner */
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Mobile: noch kompakter */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  .navbar-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .navbar img {
+    max-width: 120px;
+  }
+
+  .nav-link h5 {
+    font-size: 1rem;
+  }
+}
+
+       .navbar.bg-body-tertiary, footer, .sidebar {
+  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+    .nav-link.active {
+  color: #8cd000;
+}
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-link:hover {
+      color: #8cd000;
+    }
+
+    a:active {
+      text-decoration: underline;
+      color: #8cd000;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f4f4f4;
+      position: fixed;
+      top: 75px;
+      left: 0;
+      height: calc(100vh - 75px);
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
+      transition: all 0.3s;
+    }
+
+    .sidebar ul li.active {
+      background: #ddd;
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
+    }
+
+    .sidebar ul li:hover {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+.offcanvas-body li.nav-link.active a {
+  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
+  background-color: transparent !important; /* Kein Hintergrund */
+}
+
+    .content {
+      margin-left: 250px;
+      margin-top: 75px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .content-section {
+    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
+    margin-bottom: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
+}
+
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
+}
+
+
+    @media (max-height: 910px) {
+      body {
+        overflow-y: auto;
+      }
+    }
+
+    @media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+}
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+      }
+    }
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+    }
+
+    .previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #8cd000;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* optional Abstand nach außen */
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #8cd000;
+  color: white;
+}
+
+.mytooltip {
+  position: relative; /* Wichtig für die Positionierung des Tooltips */
+  display: inline-block; /* Oder flex/block, je nach Kontext */
+  cursor: help;
+  color:black;
+}
+
+.mytooltip .mytooltiptext {
+  visibility: hidden; /* Standardmäßig versteckt */
+  width: 220px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute; /* Positionierung über dem Element */
+  z-index: 9999;
+  bottom: 100%; /* Positioniert über dem Element */
+  left: 50%;
+  transform: translateX(-50%); /* Zentriert den Tooltip */
+  opacity: 0; /* Standardmäßig transparent */
+  transition: opacity 0.3s; /* Sanfter Übergang */
+}
+
+.mytooltip:hover .mytooltiptext,
+.mytooltip:focus .mytooltiptext {
+  visibility: visible; /* Wird bei Hover sichtbar */
+  opacity: 1; /* Wird vollständig sichtbar */
+} 
+
+.toast {
+  background-color: rgba(255, 255, 255, 0.95) !important; /* Weiß, 85% Deckkraft */
+  backdrop-filter: blur(5px);  /* optional schöner Glas-Effekt */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+a[data-bs-toggle="mytooltip"] {
+  display: inline;       /* nicht block, sondern wirklich inline */
+  white-space: normal;   /* keine erzwungenen Abstände */
+  margin: 0 !important;  /* Sicherheitsnetz: keine Ränder */
+  padding: 0 !important; /* Sicherheitsnetz: kein Innenabstand */
+  line-height: inherit;  /* gleiche Zeilenhöhe wie der Text */
+}
+
+.tooltip.fade {
+  transition: none !important;
+}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <button class="btn btn-outline-success d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+      ☰
+    </button>
+
+    <!-- Titel links -->
+    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+
+    <!-- ZENTRIERTE LINKS -->
+    <div class="d-none d-lg-flex justify-content-center flex-grow-1">
+      <div class="d-flex gap-4">
+<a href="allgemeines.html" class="nav-link"><h5>ALLGEMEINES</h5></a>
+<a href="methoden.html" class="nav-link active"><h5>METHODEN</h5></a>
+<a href="beispiele.html" class="nav-link"><h5>BEISPIELE</h5></a>
+<a href="schutz.html" class="nav-link"><h5>SCHUTZ</h5></a>
+<a href="quiz.html" class="nav-link"><h5>QUIZ</h5></a>
+      </div>
+    </div>
+
+    <!-- Logo rechts -->
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+  </div>
+</nav>
+
+    <!-- Sidebar -->
+ <div class="sidebar d-none d-lg-block">
+    <ul>
+      <li class="menu-item active" data-section="malware">Malware</li>
+      <li class="menu-item" data-section="spam">Spam</li>
+      <li class="menu-item" data-section="phishing">Phishing</li>
+      <!--<li class="menu-item" data-section="ransomware">Ransomware</li> -->
+      <li class="menu-item" data-section="mitm">Man-in-the-Middle-Angriff</li>
+      <li class="menu-item" data-section="ddos">DoS- und DDoS-Angriffe</li>
+    </ul>
+  </div>
+
+  <!-- Offcanvas Sidebar (Mobile) -->
+  <div class="offcanvas offcanvas-start d-flex flex-column align-items-center text-center" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" aria-label="Schließen"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul>
+        <li class="nav-link"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+        <li class="nav-link active"><a href="methoden.html"><h5>METHODEN</h5></a></li>
+        <li class="nav-link"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+        <li class="nav-link"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+        <li class="nav-link"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+      <section id="malware" class="content-section">
+        <h2>Malware</h2>
+        <p style="font-size:17px;">
+          Ein Malware-Angriff stellt eine der am weitesten verbreiteten und gefährlichsten Formen von Cyberangriffen dar. Dabei handelt es sich um den gezielten Einsatz von bösartiger Software, die unbefugt in ein Computersystem oder Netzwerk eingeschleust wird, um dort schädliche oder unerwünschte Aktionen auszuführen. 
+          Diese Aktionen können vielfältig sein – sie reichen vom heimlichen Ausspionieren sensibler Daten bis hin zur vollständigen Lahmlegung ganzer Systeme.
+          Der Begriff "Malware" umfasst eine Vielzahl von schädlichen Programmen, darunter <a href="https://de.wikipedia.org/wiki/Computervirus" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="eine Art Schadsoftware (Malware), die sich an ein anderes Programm oder eine Datei anhängt und sich selbst replizieren kann, um sich auf andere Geräte zu verbreiten..." 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">Viren</a>, <a href="https://de.wikipedia.org/wiki/Computerwurm" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="eine Schadsoftware (Malware), die sich selbstständig, also ohne menschliches Eingreifen, replizieren und über Netzwerke oder andere Verbindungen auf andere Geräte ausbreiten kann..." 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">Würmer</a>, <a href="https://wirtschaftslexikon.gabler.de/definition/trojaner-53413" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="eine Schadsoftware (Malware), die sich als harmloses oder nützliches Programm ausgibt, um sich unbemerkt auf Ihrem Computer zu installieren ..." 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">Trojaner</a>, <a href="https://de.wikipedia.org/wiki/Ransomware" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="Ransomware ist eine Art von Schadsoftware, die Daten verschlüsselt oder Geräte sperrt..." 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">Ransomware</a> und <a href="https://de.wikipedia.org/wiki/Spyware" target="_blank"
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="Spyware ist eine Art von Schadsoftware (Malware), die heimlich auf Computern oder Smartphones installiert wird, um persönliche Daten und Aktivitäten des Nutzers zu sammeln und an Dritte weiterzugeben."
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">Spyware</a>. Jede dieser Formen ist darauf ausgerichtet, ein bestimmtes Ziel zu erreichen.<br>
+      Anzeichen dafür, dass ein Computer oder System mit Schadsoftware infiziert ist, sind oft nicht sofort erkennbar. Es handelt sich meist um mehrere kleinen Auffälligkeiten, die zusammen ein Bild ergeben.<br>
+       <ul>
+    <li>Leistungsprobleme, obwohl nichts „Großes“ läuft: Der PC ist plötzlich langsam, die Auslastung von Prozessor, Arbeitsspeicher oder Netzwerk ist hoch – ohne sichtbaren Grund.</li>
+    <li>Unbekannte Programme oder Prozesse laufen im Hintergrund. Manche starten sogar automatisch mit dem System, obwohl man sie nicht selbst installiert hat.</li>
+    <li>Seltsame Einträge in Systemprotokollen: Zum Beispiel ungewöhnliche Fehlermeldungen oder Anmeldeversuche zu seltsamen Zeiten.</li>
+    <li>Auffälliger Datenverkehr ins Internet: Häufige, kurze Verbindungen zu unbekannten Webseiten oder IP-Adressen oder Datenverkehr auf untypischen „Kanälen“ (Ports).</li>
+    <li>Veränderte oder verschwundene Dateien: Dateien werden z. B. plötzlich verschlüsselt oder umbenannt, oder sind einfach nicht mehr da.</li>
+    <li>Neue oder veränderte Benutzerkonten, die vorher nicht existierten oder plötzlich andere Rechte haben.</li>
+    <li>Seltsame geplante Aufgaben (z. B. automatische Prozesse zu ungewöhnlichen Zeiten).</li>
+    <li>Technische Auffälligkeiten wie z. B. ungewöhnliche PowerShell-Befehle, Programme aus temporären Ordnern oder viele fehlgeschlagene Login-Versuche.</li>
+  </ul>
+
+      </section>
+
+      <section id="spam" class="content-section">
+        <h2>Spam</h2>
+        <p style="font-size:17px">Spam, oft auch als Junk bezeichnet, bezieht sich in erster Linie auf unerwünscht erhaltene Nachrichten, die auf elektronischem Weg übermittelt werden und in der Regel werbenden Charakter haben.
+          Oft werden diese E-Mails an eine große Zahl von Empfängern gleichzeitig versandt, ohne dass die Empfänger vorher eingewilligt haben.<br>
+          Bei Spam steht in erster Linie die Bewerbung von Produkten, die Lenkung des Verkehrs auf bestimmte Websites oder schlichtweg die Verbreitung von Informationen im Vordergrund. Dabei werden die Interessen der Empfänger nicht berücksichtigt.
+          Spam-Mails sind häufig die Ursache für eine Überlastung der Posteingänge und eine Verlangsamung der E-Mail-Server. <br>Es gibt verschiedene Arten der Übermittlung, wie z. B. E-Mail, SMS, Nachrichten in Foren oder auch Werbebanner.<br><br>
+          <b>Spam-E-Mails</b><br>Spam-E-Mails repräsentieren dabei die am weitesten verbreitete Form von Spam, mit der Nutzer:innen im Internet konfrontiert werden. Diese E-Mails führen zu einer Überfüllung Ihres Postfachs und lenken Sie von den für Sie relevanten Nachrichten ab. Es besteht die Möglichkeit, die meisten Spam-E-Mails mit den meisten E-Mail-Programmen zu melden, zu filtern und zu blockieren.<br><br>
+          <b>Spam-SMS und Spam-Anrufe</b><br>Einige Spam-Versender setzen zur Erregung der Aufmerksamkeit ihrer Empfänger Textnachrichten, Mitteilungen in Form von Push-Benachrichtigungen oder telefonische Kontaktversuche ein. Darüber hinaus besteht die Möglichkeit, unerwünschte Werbe-Nachrichten mittels beliebter Social-Messaging-Dienste zu versenden.<br><br>
+          Die Erkennung von Spam-Nachrichten basiert in erster Linie auf der Identifizierung von Indizien, 
+    die auf eine hohe Wahrscheinlichkeit für Spam hindeuten. Dazu zählen insbesondere die offensichtlich 
+    dringliche Übermittlung der Nachricht, kommerzielle Absichten des Absenders sowie unrealistische oder 
+    übertriebene Versprechungen. Spam kann üblicherweise anhand bestimmter Merkmale erkannt werden, 
+    unabhängig davon, ob er über E-Mails, SMS, soziale Netzwerke oder einen Telefonanruf verbreitet wird.
+  </p>
+
+  <ul>
+    <li>Es liegt keine Information über den Absender vor.</li>
+    <li>Der Absendername erscheint auf den ersten Blick verwunderlich und lässt sich nicht ohne Weiteres entschlüsseln.</li>
+    <li>Die Ansprache erfolgt in anonymisierter Form.</li>
+    <li>Es ist kein Impressum vorhanden.</li>
+    <li>Im Gegensatz zu einem seriösen Newsletter ist kein Abmelde-Link vorhanden.</li>
+    <li>Trotz des Hinweises, dass Weblinks oder anklickbare Bilder im E-Mail-Text nicht erlaubt sind, wurden solche Elemente integriert.</li>
+    <li>Der Betreff oder der Inhalt der Nachricht scheint auf den ersten Blick ungewöhnlich zu sein.</li>
+    <li>Der Text weist eine Vielzahl an Grammatik- und Rechtschreibfehlern auf.</li>
+    <li>Die zu übermittelnden Daten sind in Form von Zip-, Word- oder Excel-Dateien im Anhang enthalten.</li>
+    <li>Es fehlt eine persönliche Ansprache.</li>
+  </ul>
+        </p>
+      </section>
+
+      <section id="phishing" class="content-section">
+        <h2>Phishing</h2>
+        <p style="font-size:17px;">Der Begriff „Phishing“ setzt sich aus den Wörtern „Passwort“ und „Angeln“ (im Englischen „fishing“) zusammen, was es bildlich gesprochen das Angeln nach Passwörtern bedeutet. 
+        Dieser Ausdruck beschreibt eine von Cyberkriminellen angewendete Technik, durch die persönliche, sensible oder vertrauliche Informationen, wie Zugangsdaten für Online-Banking oder ähnliche Dienst-leistungen, erlangt werden sollen.<br>
+        Phishing zielt primär darauf ab, sensible Daten zu erlangen. Täter versuchen, Anmeldeinformationen abzufangen, um Identitäten zu stehlen und so Zugriff auf persönliche oder finanzielle Informationen zu erlangen. In vielen Fällen ist dies ein Mittel für finanziellen Betrug. Dies kann zum Beispiel durch den Diebstahl von Kreditkartendaten oder anderen Zahlungsinformationen erfolgen. Damit erbeuten Kriminelle Geld von ihren Opfern.<br>
+        Die Wege, die man an die Daten von Internet-nutzern rankommt, sind meistens unterschiedlich, da sie über gefälschte Internetadressen, E-Mails oder SMS abgefangen werden können.<br><br>
+        <b>Phishing-Mails</b><br>Phishing-Mails sind betrügerische E-Mails, die darauf abzielen, sensible Daten wie Zugangsdaten oder Finanzinformationen zu stehlen, indem sie sich als vertrauenswürdige Organisationen oder Personen ausgeben. Sie enthalten oft verdächtige Links, Anhänge, Rechtschreibfehler und eine dringende Aufforderung zur Handlung, um den Empfänger zur Preisgabe seiner Daten zu verleiten.<br><br>
+        <b>Spear-Phishing</b><br>Unter Spear-Phishing ist eine spezifische Form des Phishing-Angriffs zu verstehen, welcher sich gegen eine bestimmte Person oder eine Gruppe von Individuen innerhalb eines Unternehmens richtet. Die involvierten Personen werden dazu verleitet, ihnen anvertraute Informationen offenzulegen, Malware zu installieren oder Zahlungen zu veranlassen, ohne sich dieser Tatsache bewusst zu sein.<br>
+            Derartige Angriffe haben oft einen legitimen und dringlichen Anschein, was dazu führen kann, dass die Empfänger:innen verlockt werden, schnell und unüberlegt zu handeln. Diese bergen ein hohes Risiko.<br>Die Inhalte sind auf die individuellen Empfänger zugeschnitten und enthalten persönliche Anreden, bekannte Namen oder spezifische Informationen, die eine höhere Glaubwürdigkeit suggerieren.<br><br>
+        <b>Smishing</b><br>Ein Phishing-Angriff, der durch betrügerische SMS-Nachrichten ausgelöst wird, um die Empfänger:innen dazu zu bewegen, schädliche Links zu klicken und ihre persönlichen Daten preiszugeben.<br><br>
+        <b>Quishing</b><br>QR-Code-Phishing, oder Quishing, ist eine Cyber-Betrugsmasche, bei der Kriminelle manipulierte QR-Codes verwenden, um Nutzer auf gefälschte Webseiten zu locken oder Malware zu verbreiten. Die Codes können an öffentlichen Orten wie Parkautomaten angebracht oder per E-Mail versendet werden, um Nutzer zur Eingabe sensibler Daten wie Passwörter oder Kreditkartendaten zu bewegen.<br><br>
+        <b>Evil Twin Phishing</b><br>Evil Twin Phishing ist eine Cyber-Angriffsmethode, bei der Angreifer ein gefälschtes WLAN-Netzwerk (den "Evil Twin") erstellen, das ein legitimes, öffentliches Netzwerk nachahmt, um Nutzer zur Verbindung zu verleiten. Sobald sich das Opfer mit dem gefälschten Netzwerk verbindet, kann der Angreifer den Internetverkehr überwachen, Anmeldedaten und persönliche Daten stehlen oder die Opfer auf eine gefälschte Website umleiten, um sie zum Eingeben sensibler Informationen zu verleiten. <br><br>
+            Phishing-Angriffe nutzen gezielt bestimmte Merkmale, um den Eindruck von Echtheit zu vermitteln. Die folgenden Hinweise können helfen, solche Angriffe frühzeitig zu erkennen:
+  </p>
+
+  <ul>
+    <li>
+      Dringlichkeit oder Drohungen: Wenn sofortiges Handeln gefordert oder mit Konsequenzen gedroht wird, ist Vorsicht geboten. Solche E-Mails sollen Druck erzeugen.
+    </li>
+    <li>
+      Abfrage sensibler Daten: Persönliche oder finanzielle Informationen werden oft direkt per Formular oder Link abgefragt – seriöse Unternehmen tun das nicht per E-Mail.
+    </li>
+    <li>
+      Sprachliche Auffälligkeiten: Phishing-Mails wirken oft professionell, enthalten aber häufig Grammatik- oder Rechtschreibfehler, die misstrauisch machen sollten.
+    </li>
+    <li>
+      Unbekannte oder ungewöhnliche Absender: E-Mails von fremden Absendern mit ungewöhnlicher Schreibweise der Adresse oder unerwartetem Inhalt sollten genau geprüft werden. Oft unterscheidet sich die Adresse nur minimal von einer echten.
+    </li>
+    <li>
+      Verdächtige Links oder Anhänge: Links oder Dateien in E-Mails können auf gefälschte Seiten führen oder Schadsoftware enthalten. Den Mauszeiger über den Link zu halten, zeigt oft bereits die wahre Zieladresse.
+    </li>
+  </ul>
+        </p>
+      </section>
+
+      <!--<section id="ransomware" class="content-section">
+        <h2>Ransomware</h2>
+        <p style="font-size:17px"></p>
+        </section>-->
+      
+      <section id="mitm" class="content-section">
+        <h2>Man-in-the-Middle-Angriff</h2>
+        <p style="font-size:17px">Ein Man-in-the-Middle-Angriff (kurz: MitM-Angriff) bezeichnet eine Form der Cyberattacke, bei der sich ein Angreifer unbemerkt zwischen zwei kommunizierende Parteien – beispielsweise zwischen einem Nutzer und einer Website oder einem Online-Dienst – einschaltet. Ziel dieser Attacke ist es, den Datenverkehr in Echtzeit abzufangen, auszuspionieren, zu manipulieren oder sogar zu stehlen. Dabei tritt der Angreifer quasi als „unsichtbarer Dritter“ auf, der die Kommunikation vollständig kontrollieren kann, ohne dass die beteiligten Parteien dies unmittelbar bemerken.<br><br>
+          Typischerweise beginnt ein solcher Angriff in unsicheren oder öffentlich zugänglichen Netzwerken, wie etwa in einem Café, Hotel oder an einem Flughafen. Besonders anfällig sind WLANs, die keine oder nur unzureichende Verschlüsselung verwenden. Eine gängige Methode besteht darin, einen gefälschten WLAN-Hotspot zu erstellen, der einem legitimen Netzwerk täuschend ähnlich sieht – sowohl im Namen (SSID) als auch in der Signalstärke. Verbindet sich ein Nutzer versehentlich mit diesem betrügerischen Netzwerk, wird der gesamte Datenverkehr über das System des Angreifers geleitet.<br><br>
+          Sobald die Verbindung hergestellt ist, kann der Angreifer sämtliche übertragenen Daten einsehen – dazu zählen unter anderem Passwörter, Benutzernamen, Kreditkartendaten und persönliche Nachrichten. Besonders kritisch ist, dass der Angreifer nicht nur passiv mitliest, sondern auch aktiv in den Datenfluss eingreifen kann. So ist es ihm möglich, Inhalte zu verändern oder Schadsoftware in scheinbar legitime Webseiten einzuschleusen. Auch Login-Vorgänge können abgefangen und manipuliert werden, sodass der Angreifer Zugang zu sensiblen Benutzerkonten erhält.<br><br>
+          Wichtige Arten von MITM-Angriffen<br><br>
+          <b>ARP-Spoofing</b><br>Ein Angreifer fälscht das <a href="https://ausbildung-in-der-it.de/lexikon/arp-cache" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="ein Netzwerkprotokoll, das verwendet wird, um die IP-Adresse mit der physikalischen MAC-Adresse eines Geräts in einem lokalen Netzwerk (LAN) zu verknüpfen..." 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">Address Resolution Protocol (ARP)</a>, um die MAC-Adresse eines Geräts mit seiner eigenen IP-Adresse zu verknüpfen und so den Datenverkehr zu seiner Person umzuleiten.<br>Folge: Der Datenverkehr der Opfer läuft über den Angreifer.<br><br> 
+<b>DNS-Spoofing</b><br>Hierbei werden gefälschte <a href="https://de.wikipedia.org/wiki/DNS-Spoofing" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title=" Zuordnung der IP-Adresse zu einer Domain" 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">DNS-Einträge</a>
+ verwendet, um einen Benutzer von einer legitimen Website zu einer bösartigen Website umzuleiten, um Anmeldeinformationen zu stehlen. Nutzer landen also auf einer Fake-Seite, obwohl die eingegebene Domain korrekt ist.<br><br>  
+<b>HTTPS/SSL-Trip</b><br>Bei dieser Methode wird eine sichere Netzwerkverbindung durch einen Angreifer abgefangen und der Benutzer zu einer unsicheren Website umgeleitet, die jedoch eine gefälschte sichere Verbindung simuliert.<br><br>  
+<b>E-Mail-Hijacking</b><br>Der Angreifer verschafft sich Zugriff auf das E-Mail-Konto eines Benutzers, um die Kommunikation zu überwachen, E-Mails zu ändern und beispielsweise Zahlungen umzuleiten.<br><br>
+<b>Session-Hijacking</b><br>Statt Passwörter direkt zu stehlen, klaut der Angreifer Session-Cookies oder Token, mit denen sich der Angreifer als eingeloggter Nutzer beim Dienst anmelden kann.<br><br>
+ Bei einem „Man-in-the-Middle“-Angriff klinkt sich jemand unbemerkt zwischen Nutzer und Internetseite oder -dienst ein, um Daten mitzulesen oder zu verändern. Auch hier gibt es Warnzeichen:<br>
+       <ul>
+    <li>Zertifikatswarnungen im Browser: Der Browser warnt, dass eine Website unsicher ist – obwohl man ihr normalerweise vertraut.</li>
+    <li>Unerwartete Anmeldeaufforderungen: Websites, bei denen man normalerweise eingeloggt bleibt, verlangen plötzlich mehrfach das Passwort.</li>
+    <li>Veränderte Netzwerkdaten: Z. B. doppelte Netzwerkadressen oder merkwürdige Umleitungen.</li>
+    <li>Langsame oder instabile Verbindungen, obwohl das vorher nicht der Fall war.</li>
+    <li>Ungewohnte Inhalte auf Webseiten oder unterschiedliche Darstellungen, je nachdem, wann oder wie man darauf zugreift.</li>
+    <li>Verdächtige Protokolleinträge: Z. B. Zugriffe aus Ländern oder IP-Adressen, die nicht zu den normalen Nutzern gehören.</li>
+  </ul>
+</p>
+        </section>
+          
+      <section id="ddos" class="content-section">
+        <h2>DoS- und DDoS-Angriffe</h2>
+        <p style="font-size:17px;">DoS- (Denial of Service) oder DDoS-Angriffe (Distributed Denial of Service) sind eine Form von Cyberangriffen, bei denen böswillige Akteure zum Beispiel einen Trojaner einsetzen, um eine große Menge an Datenverkehr zu erzeugen und ein Computersystem, ein Netzwerk oder eine Website zu überlasten. Im Falle eines herkömmlichen DoS-Angriffs wird der Datenverkehr von einem einzelnen Computer oder einer einzelnen Quelle erzeugt. Dabei wird das Ganze von einem einzigen Gerät per Skript oder Tool ausgeführt.
+          Im Gegensatz dazu wird bei einem DDoS-Angriff eine Vielzahl von infizierten Computern, auch bekannt als Botnetz, für den Angriff genutzt. Dies hat zur Folge, dass legitime Benutzer den Zugriff auf den angegriffenen Dienst oder die Website verlieren. DDoS-Angriffe werden häufig von Hackern, kriminellen Organisationen oder sogar staatlichen Akteuren eingesetzt, um Unternehmen oder Online-Dienste zu erpressen, zu stören oder auszuschalten.<br>
+          Man unterscheidet bei DoS- und DDoS-Angriffe mehrere Typen, die sich in ihrer Vorgehensweise und ihrem Ziel unterscheiden:<br><br>
+          <b>Volumenbasierte Angriffe</b><br>Volumenbasierte Angriffe zielen darauf ab, die verfügbare Bandbreite eines Netzwerks oder Servers zu überlasten, indem sie diesen mit einer extrem großen Menge an Datenpaketen überschwemmen. Typisch sind hier etwa sogenannte UDP-Überflutungen, bei denen Millionen von Anfragen gleichzeitig gesendet werden. Der Server kann diese Masse nicht mehr verarbeiten, was zu einer erheblichen Verlangsamung oder einem vollständigen Ausfall führt.<br><br>
+          <b>Protokollbasierte Angriffe</b><br>Protokollbasierte Angriffe nutzen Schwachstellen in den technischen Protokollen aus, die zur Datenübertragung verwendet werden – etwa dem <a href="https://de.wikipedia.org/wiki/Transmission_Control_Protocol/Internet_Protocol" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="abk. für Transmission Control Protocol/Internet Protocol. Es teilt Daten in Pakete auf, adressiert und leitet sie über das Netzwerk und setzt sie am Zielort wieder zusammen, wobei es eine zuverlässige und fehlerfreie Kommunikation gewährleistet." 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">TCP/IP-Protokoll</a>. Ein Beispiel ist der sogenannte       <a href="https://de.wikipedia.org/wiki/SYN-Flood" target="_blank" 
+      data-bs-toggle="mytooltip" data-bs-placement="top"
+      title="Überflutung von Paketen, die von einem Client an einen Server gesendet wird, um eine Verbindung herzustellen" 
+      style="color:#0d6efd; text-decoration:underline; cursor:pointer;">SYN-Flood</a>, bei dem der Angreifer eine große Anzahl an Verbindungsanfragen (SYN-Pakete) sendet, diese aber nicht vollständig abschließt. Der Server reserviert dennoch Ressourcen für jede dieser Anfragen, bis seine Kapazitäten erschöpft sind. Das kann dazu führen, dass legitime Nutzer keine Verbindung mehr herstellen können.<br><br>
+          <b>Anwendungsbasierte Angriffe</b><br>Anwendungsbasierte Angriffe richten sich gezielt gegen bestimmte Webanwendungen oder Online-Dienste. Sie simulieren legitime Benutzeranfragen in sehr hoher Anzahl, um die Serverauslastung massiv zu steigern. Ein typisches Beispiel ist der Angriff auf einen Online-Shop, bei dem tausende „Kaufen“- oder „Produkt anzeigen“-Anfragen gleichzeitig ausgelöst werden. Da jede dieser Anfragen serverseitig verarbeitet werden muss – oft inklusive Datenbankabfragen oder Authentifizierung – kann das System schnell überlastet werden, obwohl der Datenverkehr selbst verhältnismäßig gering ist.<br><br>
+ Bei einem Denial-of-Service (DoS) oder Distributed Denial-of-Service (DDoS) wird ein System mit so vielen Anfragen überflutet, dass es überlastet und nicht mehr richtig funktioniert. Typische Hinweise sind:<br>
+       <ul>
+    <li>Plötzlich extrem viel Datenverkehr, obwohl gerade keine Aktion oder Kampagne läuft.</li>
+    <li>Viele gleichzeitige Verbindungen oder sehr viele offene, aber nicht abgeschlossene Verbindungsversuche.</li>
+    <li>Lange Ladezeiten, Fehlerseiten oder Verbindungsabbrüche, vor allem bei Webdiensten.</li>
+    <li>Ungewöhnlich viele Anfragen aus verschiedenen Ländern, häufig automatisiert (z. B. durch Bots).</li>
+    <li>Gleiche Muster in den Anfragen, z. B. identische Browserkennungen oder automatisierte Aufrufe.</li>
+    <li>Hohe Auslastung von Servern oder Netzwerkgeräten: Diese müssen plötzlich deutlich mehr verarbeiten als üblich.</li>
+  </ul>
+  </p>
+      </section>
+
+      <div class="button-container">
+        <a href="allgemeines.html"><button class="prev-button">&laquo; Allgemeines</button></a>
+        <a href="beispiele.html"><button class="next-button">Beispiele &raquo;</button></a>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const sections = document.querySelectorAll('.content-section');
+
+    // Klick-Logik
+    menuItems.forEach(item => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        const sectionId = this.getAttribute('data-section');
+        const target = document.getElementById(sectionId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 100,
+            behavior: 'smooth'
+          });
+
+          // URL aktualisieren ohne Reload
+          history.replaceState(null, '', '#' + sectionId);
+        }
+      });
+    });
+
+    // Scroll-Logik (aktiviert aktuellen Menüpunkt beim Scrollen)
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.add('active');
+        }
+      });
+    });
+  });
+
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // 1) Init: Tooltips nur per Hover (kein Klick/Focus)
+  const tooltipTriggers = Array.from(document.querySelectorAll('[data-bs-toggle="mytooltip"]'));
+  tooltipTriggers.forEach(el => {
+    // trigger: 'hover' verhindert, dass Fokus/click das Tooltip wieder aufweckt
+    new bootstrap.Tooltip(el, { trigger: 'hover', placement: 'top' });
+  });
+
+  // Hilfsfunktion: alle Bootstraps-Tooltips verstecken / entfernen
+  function hideAllTooltips() {
+    tooltipTriggers.forEach(el => {
+      const inst = bootstrap.Tooltip.getInstance(el);
+      if (inst) {
+        try {
+          inst.hide(); // ausblenden
+          // inst.dispose(); // falls du Instanzen komplett entfernen willst
+        } catch (e) { /* ignore */ }
+      }
+    });
+
+    // Entferne evtl. noch sichtbare tooltip DOM-Nodes (Bootstrap hängt Tooltip-Anzeige oft an <body>)
+    document.querySelectorAll('body > .mytooltip').forEach(node => {
+      // sichere Entfernung wenn noch sichtbar/verwaist
+      if (node.classList.contains('show')) {
+        node.classList.remove('show');
+      }
+      // optional: node.remove();
+    });
+  }
+
+  // 2) Beim Klick auf einen Tooltip-Link sofort alle Tooltips verbergen
+  // (wichtig z. B. wenn target="_blank" verwendet wird — original Seite bleibt dann offen)
+  tooltipTriggers.forEach(el => {
+    el.addEventListener('click', (ev) => {
+      hideAllTooltips();
+      // wenn du eine SPA-Navigation machst: call hideAllTooltips() vor pushState/replaceState
+    });
+  });
+
+  // 3) Klick irgendwo anders -> schließen
+  document.addEventListener('click', (ev) => {
+    if (!ev.target.closest('[data-bs-toggle="mytooltip"]')) {
+      hideAllTooltips();
+    }
+  }, true);
+
+  // 4) Wenn die Seite in den Hintergrund geht (neuer Tab), verstecke Tooltips
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) hideAllTooltips();
+  });
+
+  // 5) Bei Unload (zusätzlich)
+  window.addEventListener('beforeunload', hideAllTooltips);
+});
+</script>
+</body>
+</html>
