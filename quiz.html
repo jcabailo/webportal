@@ -183,6 +183,19 @@
   color: black;               /* Farbe kann sich beim Hover ändern */
 }
 
+/* Kleine Screens (z.B. iPhone 12) */
+@media (max-width: 400px) {
+  .navbar img { {
+    height: 50px; /* Logo kleiner */
+  }
+  .navbar-title {
+    display: none; /* kein Titel  */
+  }
+  .navbar {
+    padding: 10px 14px; /* Navbar kompakter */
+  }
+}
+    
     @media (max-height: 910px) {
       body {
         overflow-y: auto;
@@ -245,7 +258,7 @@
     </button>
 
     <!-- Titel links -->
-    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+    <a class="navbar-brand" href="index.html"><h2 class="navbar-title">IT-SAFEZONE</h2></a>
 
     <!-- ZENTRIERTE LINKS -->
     <div class="d-none d-lg-flex justify-content-center flex-grow-1">
@@ -384,4 +397,5 @@
   });
 </script>
 </body>
+
 </html>
