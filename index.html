@@ -76,7 +76,27 @@ footer {
       div {
     flex: 1; /* Sorgt dafür, dass der Inhalt die gesamte Höhe einnimmt */
       } 
+        
+    @media (max-width: 768px) {
+      .navbar-brand h1 {
+        font-size: 1.2rem;
+      }
 
+      .navbar-brand img {
+        height: 40px;
+      }
+
+      .card {
+        max-width: 90%;
+        margin: 10px auto;
+      }
+
+      main {
+        padding-top: 80px; /* etwas weniger Platz bei kleinen Geräten */
+      }
+    }
+
+        
       @media (max-height: 950px) { /* Falls der Bildschirm kleiner als 950px ist */
     body {
         overflow-y: auto; /* Scrollen aktivieren */
@@ -172,4 +192,5 @@ footer {
   </div>
 </body>
 </html>
+
 
