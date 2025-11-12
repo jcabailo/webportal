@@ -70,6 +70,19 @@
   transition: all 0.3s ease;
 }
 
+/* Kleine Screens (z.B. iPhone 12) */
+@media (max-width: 400px) {
+  .navbar-logo {
+    height: 50px; /* Logo kleiner */
+  }
+  .navbar-title {
+    display: none; /* kein Titel  */
+  }
+  .navbar {
+    padding: 10px 14px; /* Navbar kompakter */
+  }
+}
+    
 /* Mobile: noch kompakter */
 @media (max-width: 991px) {
   .navbar {
@@ -245,7 +258,7 @@
     </button>
 
     <!-- Titel links -->
-    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+    <a class="navbar-brand" href="index.html"><h2 class="navbar-title">IT-SAFEZONE</h2></a>
 
     <!-- ZENTRIERTE LINKS -->
     <div class="d-none d-lg-flex justify-content-center flex-grow-1">
@@ -259,7 +272,7 @@
     </div>
 
     <!-- Logo rechts -->
-    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200" alt="Logo" class="navbar-logo">
   </div>
 </nav>
 
@@ -435,4 +448,5 @@
   });
 </script>
 </body>
+
 </html>
