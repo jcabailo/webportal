@@ -185,14 +185,19 @@
 
 /* Kleine Screens (z.B. iPhone 12) */
 @media (max-width: 400px) {
-  .navbar img-fluid {
-    height: 50px; /* Logo kleiner */
+  /* Logo größer */
+  .navbar img.img-fluid {
+    height: 50px; /* etwas größer als vorher */
+    max-width: none;
   }
-  .navbar-title {
-    display: none; /* kein Titel  */
+
+  /* Titel ausblenden */
+  .navbar .navbar-title {
+    display: none !important;
   }
+
   .navbar {
-    padding: 10px 14px; /* Navbar kompakter */
+    padding: 10px 14px;
   }
 }
     
@@ -399,5 +404,6 @@
 </body>
 
 </html>
+
 
 
