@@ -78,14 +78,17 @@ footer {
       } 
 
         /* Für kleine Smartphones wie iPhone 12 */
-@media only screen and (max-width: 400px) {
-  /* Navbar */
-  .navbar-brand h1 {
-    font-size: 1rem;  /* Text kleiner */
+@media (max-width: 400px) {
+  .navbar-logo {
+    height: 35px; /* Logo kleiner */
   }
-  .navbar-brand img {
-    height: 35px;     /* Logo kleiner */
+  .navbar-title {
+    font-size: 1.2rem; /* Titel kleiner */
   }
+  .navbar {
+    padding: 5px 10px; /* Navbar kompakter */
+  }
+}
 
   /* Karten */
   .card {
@@ -95,12 +98,7 @@ footer {
 
   /* Text im Body */
   body, div {
-    font-size: 16px;  /* Text anpassen, dass er lesbar bleibt */
-  }
-
-  /* Abstand unter fixierter Navbar */
-  main {
-    padding-top: 70px;
+    font-size: 14px;  /* Text anpassen, dass er lesbar bleibt */
   }
 }
         
@@ -133,8 +131,8 @@ footer {
 <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <h1>IT-SAFEZONE</h1> 
-        <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+        <h1 class="navbar-title">IT-SAFEZONE</h1> 
+        <img src="BUG_Logo_Gruppe_RGB.png" width="200" alt="Logo" class="navbar-logo">
       </div>
     </nav><br>
     <div style="font-size:17px;"><center>Willkommen bei IT-SafeZone – Ihr Schutz vor Cyberbedrohungen!</center></div><br>
@@ -199,6 +197,7 @@ footer {
   </div>
 </body>
 </html>
+
 
 
 
