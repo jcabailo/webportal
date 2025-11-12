@@ -69,6 +69,19 @@
   transition: all 0.3s ease;
 }
 
+/* Kleine Screens (z.B. iPhone 12) */
+@media (max-width: 400px) {
+  .navbar-logo {
+    height: 50px; /* Logo kleiner */
+  }
+  .navbar-title {
+    font-size: 1.3rem; /* Titel kleiner */
+  }
+  .navbar {
+    padding: 10px 14px; /* Navbar kompakter */
+  }
+}
+    
 /* Mobile: noch kompakter */
 @media (max-width: 991px) {
   .navbar {
@@ -292,7 +305,7 @@ a[data-bs-toggle="mytooltip"] {
     </button>
 
     <!-- Titel links -->
-    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+    <a class="navbar-brand" href="index.html"><h2 class="navbar-title">IT-SAFEZONE</h2></a>
 
     <!-- ZENTRIERTE LINKS -->
     <div class="d-none d-lg-flex justify-content-center flex-grow-1">
@@ -306,7 +319,7 @@ a[data-bs-toggle="mytooltip"] {
     </div>
 
     <!-- Logo rechts -->
-    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200" alt="Logo" class="navbar-logo">
   </div>
 </nav>
 
@@ -523,4 +536,5 @@ Schließlich gibt es auch <b>gesellschaftliche Auswirkungen</b>. Angriffe auf kr
 });
 </script>
 </body>
+
 </html>
