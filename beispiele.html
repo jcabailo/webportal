@@ -202,9 +202,29 @@
 
 @media screen and (max-width: 400px) {
   img {
-    max-width: 95%; /* oder 100%, wenn du den Rand ganz ausnutzen willst */
-    max-height: 250px; /* <<< Höhe begrenzt (anpassen, z. B. 200–300px) */
+    display: block;
+    max-width: 100%;
+    width: 100%;
     height: auto;
+    max-height: 250px;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  /* Entfernt ungewolltes Padding / Margin vom Container */
+  .content-section,
+  .container,
+  .container-fluid,
+  .text-center {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 
   .content-section {
@@ -983,4 +1003,5 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
 
