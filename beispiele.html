@@ -88,6 +88,45 @@
   .nav-link h5 {
     font-size: 1rem;
   }
+
+    img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+  }
+
+img[width], img[height], svg[width], svg[height] {
+  width: auto !important;
+  height: auto !important;
+}
+  
+  .content-section, .container, .container-fluid, p, span {
+    word-wrap: break-word; /* alte Syntax */
+    overflow-wrap: break-word; /* moderne Syntax */
+    hyphens: auto; /* optional, für Trennung bei langen Wörtern */
+  }
+  
+  /* Entfernt ungewolltes Padding / Margin vom Container */
+  .content-section,
+  .container,
+  .container-fluid,
+  .text-center {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .content-section {
+    padding: 0 1rem; /* sorgt für etwas Innenabstand */
+  }
 }  
        .navbar.bg-body-tertiary, footer, .sidebar {
   background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
@@ -1014,6 +1053,7 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
 
 
 
