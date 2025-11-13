@@ -88,32 +88,7 @@
   .nav-link h5 {
     font-size: 1rem;
   }
-}
-
-img, svg, iframe {
-  max-width: 100% !important;  /* niemals breiter als der Viewport */
-  width: 100% !important;      /* füllt Breite des Containers */
-  height: auto !important;     /* behält Seitenverhältnis */
-  display: block;              /* entfernt kleine Zwischenräume bei Inline-Elementen */
-  margin: 0 auto;              /* zentriert, falls kleiner */
-  overflow: hidden;
-  object-fit: contain;         /* Bild bleibt vollständig sichtbar */
-}
-
-/* Entferne harte Inline-Breiten aus HTML */
-img[width], img[height], svg[width], svg[height] {
-  width: auto !important;
-  height: auto !important;
-}
-
-/* Optional: Verhindert, dass Bilder durch Schatten oder Rahmen überstehen */
-figure, .image-container, .diagram-wrapper {
-  max-width: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-    
+}  
        .navbar.bg-body-tertiary, footer, .sidebar {
   background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
   backdrop-filter: blur(5px); /* Optional: Weichzeichner */
@@ -1039,6 +1014,7 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
 
 
 
