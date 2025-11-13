@@ -460,7 +460,7 @@
         // Füge Klasse hinzu, damit CSS anpasst
         sidebar.classList.add('in-offcanvas');
         // Hänge Sidebar ans offcanvas body (vorhandene Inhalte bleiben erhalten)
-        offcanvasBody.insertBefore(sidebar, offcanvasBody.firstChild);
+        offcanvasBody.appendChild(sidebar);
       }
     } else {
       // Desktop: wenn Sidebar aktuell in offcanvas ist -> zurücksetzen
@@ -505,6 +505,7 @@
 </body>
 
 </html>
+
 
 
 
