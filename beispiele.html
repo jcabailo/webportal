@@ -212,6 +212,11 @@
     max-height: 250px;
   }
 
+img[width], img[height], svg[width], svg[height] {
+  width: auto !important;
+  height: auto !important;
+}
+  
   .content-section, .container, .container-fluid, p, span {
     word-wrap: break-word; /* alte Syntax */
     overflow-wrap: break-word; /* moderne Syntax */
@@ -325,60 +330,6 @@
 
   :root { --card-bg: #ffffff; --page-bg: #f8fafc; --text:#0f172a; --muted:#475569; }
   .card { background: var(--card-bg); border-radius:12px; padding:14px; box-shadow:0 10px 30px rgba(2,6,23,0.06); max-width:1100px; margin:24px auto; }
-
-    *,
-*::before,
-*::after { box-sizing: border-box; }
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden !important; /* absoluter Schutz vor horizontalem Scrollen */
-}
-
-/* Alle großen Container auf 100% limitieren */
-.container, .container-fluid, .content, .content-section, .card, .diagram-wrapper {
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
-/* Bilder/iframes/SVG wirklich responsiv machen (überschreibt inline width/height) */
-img, iframe, svg {
-  max-width: 100% !important;
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-}
-
-/* SVG: verhindern, dass sichtbare Pfade außenrum die Seite verbreitern */
-svg {
-  overflow: hidden !important;
-}
-
-/* Falls Inline-Width-Attribute gesetzt sind (z.B. <img width="200">) */
-img[width], img[height] {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-}
-
-/* Navbar / Logo: in sehr schmalen Landscape-Ansichten noch verkleinern */
-@media (max-width: 900px) and (orientation: landscape) {
-  .sidebar { display: none !important; } /* Sidebar sicher ausblenden */
-  .content { margin-left: 0 !important; padding: 0 10px !important; }
-  .navbar img.navbar-logo, .navbar img { max-width: 110px !important; width: auto !important; }
-  .navbar-brand h2 { font-size: 1.1rem !important; }
-  .navbar { padding: 6px 10px !important; }
-  .diagram-wrapper, .card { padding-left: 8px !important; padding-right: 8px !important; margin-left: 0 !important; margin-right: 0 !important; }
-  /* SVGs kleiner: verhindert, dass horizontale Pfeile o.ä. aus dem Viewport ragen */
-  svg[viewBox] { transform-origin: top center; }
-}
-
-/* Zusätzliche Sicherheitsregel: manches Element kann mit transform verschoben werden -> verbergen */
-body > * { min-width: 0; }
-
-/* Wenn du Bootstrap-Utilities nutzt: setze overflow-hidden für Body in kritischen Fällen */
-@media (max-width: 720px) {
-  body { overflow-x: hidden !important; }
   </style>
 </head>
 <body>
@@ -1064,6 +1015,7 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
 
 
 
