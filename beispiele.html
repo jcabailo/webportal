@@ -203,10 +203,21 @@
 @media screen and (max-width: 400px) {
   img {
     max-width: 95%; /* oder 100%, wenn du den Rand ganz ausnutzen willst */
+    max-height: 250px; /* <<< Höhe begrenzt (anpassen, z. B. 200–300px) */
+    height: auto;
   }
 
   .content-section {
     padding: 0 1rem; /* sorgt für etwas Innenabstand */
+  }
+  .navbar-logo {
+    height: 50px; /* Logo kleiner */
+  }
+  .navbar-title {
+    display: none; /* kein Titel  */
+  }
+  .navbar {
+    padding: 10px 14px; /* Navbar kompakter */
   }
 }
     
@@ -299,7 +310,7 @@
     </button>
 
     <!-- Titel links -->
-    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
+    <a class="navbar-brand" href="index.html"><h2 class="navbar-title">IT-SAFEZONE</h2></a>
 
     <!-- ZENTRIERTE LINKS -->
     <div class="d-none d-lg-flex justify-content-center flex-grow-1">
@@ -313,7 +324,7 @@
     </div>
 
     <!-- Logo rechts -->
-    <img src="BUG_Logo_Gruppe_RGB.png" width="200">
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200" alt="Logo" class="navbar-logo">
   </div>
 </nav>
 
@@ -972,3 +983,4 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
