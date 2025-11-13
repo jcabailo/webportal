@@ -153,6 +153,45 @@
   background-color: transparent !important; /* Kein Hintergrund */
 }
 
+.sidebar.in-offcanvas {
+  display: block !important;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  border-right: none !important;
+  padding: 0 1rem 1rem 1rem !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* Stil im Offcanvas: Listen etwas auflockern */
+#offcanvasSidebar .sidebar ul {
+  padding-left: 0;
+}
+#offcanvasSidebar .sidebar ul li {
+  padding: 12px 8px;
+  border-left: none;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Verhindert dass deine bereits existierende media query .sidebar {display:none;} Sidebar auch im Offcanvas versteckt
+   (die media query in deinem Code versteckt .sidebar unter 991px; wir überschriben das nur wenn .in-offcanvas gesetzt ist) */
+@media (max-width: 991px) {
+  .sidebar { display: none !important; }          /* Desktop-Sidebar verstecken */
+  .sidebar.in-offcanvas { display: block !important; } /* aber sichtbar, wenn in offcanvas */
+}
+
+/* Optional: scrollbar styling im Offcanvas (falls lang) */
+#offcanvasSidebar .offcanvas-body {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+    
     .content {
       margin-left: 250px;
       margin-top: 75px;
@@ -400,10 +439,73 @@
       });
     });
   });
+
+  (function() {
+  const sidebar = document.querySelector('.sidebar');
+  const offcanvasBody = document.querySelector('#offcanvasSidebar .offcanvas-body');
+  if (!sidebar || !offcanvasBody) return; // Sicherheit
+
+  // Erstelle Platzhalter, damit wir die Sidebar zurücktauschen können
+  const placeholder = document.createElement('div');
+  placeholder.id = 'sidebar-placeholder';
+
+  // Funktion: verschiebe Sidebar ins Offcanvas (mobile) oder zurück (desktop)
+  function relocateSidebar() {
+    const isMobile = window.innerWidth <= 991; // gleiche Breakpoint wie dein CSS
+    if (isMobile) {
+      // wenn Sidebar noch nicht im Offcanvas ist: verschieben
+      if (!sidebar.classList.contains('in-offcanvas')) {
+        // Ersetze Sidebar durch Placeholder am Originalplatz
+        sidebar.parentNode.replaceChild(placeholder, sidebar);
+        // Füge Klasse hinzu, damit CSS anpasst
+        sidebar.classList.add('in-offcanvas');
+        // Hänge Sidebar ans offcanvas body (vorhandene Inhalte bleiben erhalten)
+        offcanvasBody.insertBefore(sidebar, offcanvasBody.firstChild);
+      }
+    } else {
+      // Desktop: wenn Sidebar aktuell in offcanvas ist -> zurücksetzen
+      if (sidebar.classList.contains('in-offcanvas')) {
+        // Entferne Klasse
+        sidebar.classList.remove('in-offcanvas');
+        // Entferne von Offcanvas und setze am ursprünglichen Ort zurück (replace placeholder)
+        if (placeholder.parentNode) {
+          placeholder.parentNode.replaceChild(sidebar, placeholder);
+        } else {
+          // Fallback: füge an body an (sollte nicht nötig sein)
+          document.body.insertBefore(sidebar, document.body.firstChild);
+        }
+      }
+    }
+  }
+
+  // Initial beim Laden
+  window.addEventListener('load', relocateSidebar);
+  // Bei Resize (auch Rotate)
+  window.addEventListener('resize', () => {
+    // throttle simple: Kleine Verzögerung, um unnötiges Rumhüpfen zu vermeiden
+    clearTimeout(window._relocateSidebarTimeout);
+    window._relocateSidebarTimeout = setTimeout(relocateSidebar, 120);
+  });
+
+  // Optional: Schließe offcanvas, wenn ein Sidebar-Link geklickt wurde (UX)
+  offcanvasBody.addEventListener('click', (e) => {
+    const target = e.target.closest('.sidebar a, .sidebar li');
+    if (!target) return;
+    // Wenn offcanvas sichtbar: benutze Bootstrap's Offcanvas-API, wenn vorhanden
+    try {
+      const offcanvasEl = document.getElementById('offcanvasSidebar');
+      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
+      bsOffcanvas.hide();
+    } catch (err) {
+      // no-op
+    }
+  });
+})();
 </script>
 </body>
 
 </html>
+
 
 
 
