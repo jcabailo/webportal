@@ -212,6 +212,12 @@
     object-fit: contain;
   }
 
+  .content-section, .container, .container-fluid, p, span {
+    word-wrap: break-word; /* alte Syntax */
+    overflow-wrap: break-word; /* moderne Syntax */
+    hyphens: auto; /* optional, für Trennung bei langen Wörtern */
+  }
+  
   /* Entfernt ungewolltes Padding / Margin vom Container */
   .content-section,
   .container,
@@ -1004,6 +1010,7 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
 
 
 
