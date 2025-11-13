@@ -200,6 +200,16 @@
   color: black;               /* Farbe kann sich beim Hover ändern */
 }
 
+@media screen and (max-width: 400px) {
+  img {
+    max-width: 95%; /* oder 100%, wenn du den Rand ganz ausnutzen willst */
+  }
+
+  .content-section {
+    padding: 0 1rem; /* sorgt für etwas Innenabstand */
+  }
+}
+    
     @media (max-height: 910px) {
       body {
         overflow-y: auto;
@@ -960,4 +970,5 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
   });
 </script>
 </body>
+
 </html>
