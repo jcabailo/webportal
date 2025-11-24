@@ -80,9 +80,11 @@
     font-size: 1.4rem;
   }
 
-  .navbar img {
-    max-width: 120px;
-  }
+.navbar img {
+  max-width: 140px;
+  height: auto;
+  transition: all 0.3s ease;
+}
 
   .nav-link h5 {
     font-size: 1rem;
@@ -230,17 +232,12 @@
 
 /* Kleine Screens (z.B. iPhone 12) */
 @media (max-width: 400px) {
-  /* Logo größer */
-  .navbar img.img-fluid {
-    height: 50px; /* etwas größer als vorher */
-    max-width: none;
+  .navbar-logo {
+    height: 50px;
   }
-
-  /* Titel ausblenden */
-  .navbar .navbar-title {
-    display: none !important;
+  .navbar-title {
+    display: none;
   }
-
   .navbar {
     padding: 10px 14px;
   }
@@ -322,7 +319,7 @@
     </div>
 
     <!-- Logo rechts -->
-    <img src="BUG_Logo_Gruppe_RGB.png" alt="BUG Gruppe Logo" class="img-fluid">
+    <img src="BUG_Logo_Gruppe_RGB.png" width="200" alt="BUG Gruppe Logo" class="navbar-logo">
   </div>
 </nav>
 
@@ -511,6 +508,7 @@
 </body>
 
 </html>
+
 
 
 
