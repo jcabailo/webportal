@@ -185,6 +185,29 @@
   border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 
+/* --- Offcanvas Navigation zentrieren --- */
+#offcanvasSidebar .offcanvas-body ul {
+  width: 100%;
+  text-align: center;
+}
+
+#offcanvasSidebar .offcanvas-body ul li {
+  text-align: center !important;
+  justify-content: center !important;
+  padding-left: 0 !important;
+}
+
+#offcanvasSidebar .offcanvas-body h5 {
+  text-align: center !important;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Entfernt Desktop-Styling, das sonst übernommen wird */
+#offcanvasSidebar .sidebar ul li {
+  border-left: none !important;
+}
+    
 /* Verhindert dass deine bereits existierende media query .sidebar {display:none;} Sidebar auch im Offcanvas versteckt
    (die media query in deinem Code versteckt .sidebar unter 991px; wir überschriben das nur wenn .in-offcanvas gesetzt ist) */
 @media (max-width: 991px) {
@@ -508,6 +531,7 @@
 </body>
 
 </html>
+
 
 
 
