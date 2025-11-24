@@ -149,63 +149,82 @@
       background: #eee;
       padding-left: 10px;
     }
-
-.offcanvas-body {
-    padding: 0 !important;  /* Entfernt die Verschiebung */
-    text-align: center; 
-}
     
 .offcanvas-body li.nav-link.active a {
   color: #8cd000 !important; /* Sattes Bootstrap-Grün */
   background-color: transparent !important; /* Kein Hintergrund */
 }
 
-.sidebar.in-offcanvas {
-  display: block !important;
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  height: auto !important;
-  border-right: none !important;
-  padding: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  overflow: visible !important;
-  text-align: center;
+#offcanvasSidebar .offcanvas-body ul,
+.sidebar ul {
+list-style: none;
+padding: 0;
+margin: 0;
+width: 100%;
+text-align: center;
 }
 
-/* Stil im Offcanvas: Listen etwas auflockern */
-#offcanvasSidebar .sidebar ul {
-  padding-left: 0;
-}
-#offcanvasSidebar .sidebar ul li {
-  padding: 12px 0px;
-  border-left: none;
-  border-bottom: 1px solid rgba(0,0,0,0.04);
-}
 
-/* --- Offcanvas Navigation zentrieren --- */
-#offcanvasSidebar .offcanvas-body ul {
-  width: 100%;
-  text-align: center;
-}
-
+/* UNIFIED LIST ITEM STYLE DESKTOP + MOBILE */
+.sidebar ul li {
+padding: 12px 0;
+cursor: pointer;
+text-align: center;
+font-size: 14px;
+border-bottom: 1px solid rgba(0,0,0,0.05);
+transition: all 0.3s;
+border-left: none !important;
+},
 #offcanvasSidebar .offcanvas-body ul li {
-  text-align: center !important;
-  justify-content: center !important;
-  padding-left: 0 !important;
+padding: 14px 0;
+font-size: 16px;
+font-weight: 500;
+text-align: center !important;
+border: none !important;
+margin: 0;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: background 0.2s;
 }
 
+
+/* ACTIVE STYLE */
+.sidebar ul li.active,
+#offcanvasSidebar .offcanvas-body ul li.active {
+background: #e6e6e6;
+color: #8cd000;
+}
+
+
+/* HOVER */
+.sidebar ul li:hover,
+#offcanvasSidebar .offcanvas-body ul li:hover {
+background: #f3f3f3;
+}
+
+
+/* TEXT INSIDE LI */
+.sidebar ul li a,
+#offcanvasSidebar .offcanvas-body ul li a {
+width: 100%;
+font-size: 16px;
+text-align: center;
+color: black;
+text-decoration: none;
+}
+
+
+/* FIX UNEVEN SIZES: All H5 inside menu */
+#offcanvasSidebar h5,
+.sidebar h5,
 #offcanvasSidebar .offcanvas-body h5 {
-  text-align: center !important;
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* Entfernt Desktop-Styling, das sonst übernommen wird */
-#offcanvasSidebar .sidebar ul li {
-  border-left: none !important;
+font-size: 16px !important;
+margin: 0;
+width: 100%;
+text-align: center;
+line-height: 1.4;
 }
     
 /* Verhindert dass deine bereits existierende media query .sidebar {display:none;} Sidebar auch im Offcanvas versteckt
@@ -315,17 +334,6 @@
   font-size: 16px;
   background: #8cd000;
   color: white;
-}
-    .offcanvas-header {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    text-align: center !important;
-    width: 100%;
-}
-
-.offcanvas-title {
-    margin: 0 auto !important; 
-    text-align: center !important;
 }
   </style>
 </head>
@@ -542,6 +550,7 @@
 </body>
 
 </html>
+
 
 
 
