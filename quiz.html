@@ -8,333 +8,325 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
-      background-size: cover;
-      background-position: center;
-      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
-    }
-
-          body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1; /* Hinter dem Inhalt */
+    html, body { 
+      height: 100%; 
+      margin: 0; 
+      padding: 0; 
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */ 
+      background-size: cover; 
+      background-position: center; 
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */ 
+    } 
+    
+    body::before { 
+      content: ""; 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      z-index: -1; /* Hinter dem Inhalt */ 
+    } 
+    
+    .content, footer {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */ 
+    } 
+    
+    .wrapper { 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+    } 
+    
+    .navbar { 
+      position: fixed; 
+      top: 0; 
+      width: 100%; 
+      z-index: 1030; 
+      background-color: rgba(255,255,255,0.95); 
+      backdrop-filter: blur(5px); 
+      -webkit-backdrop-filter: blur(5px); 
+      padding: 0.25rem 0.75rem !important; /* weniger Höhe */ 
+      min-height: 58px; /* reduziert Gesamthöhe */ 
+    } 
+    
+    .navbar-brand h2 { 
+      font-size: 1.6rem; /* kleinerer Titel */ 
+      margin: 0; /* kein zusätzlicher Außenabstand */ 
+      line-height: 1.3; 
+      font-weight: 600; 
+    } 
+    
+    nav-link h5 { 
+      font-size: 1.05rem; /* kompaktere Links */ 
+      margin: 0; 
+      line-height: 1.3; 
+      font-weight: 500; 
+    } 
+    
+    .navbar img { 
+      max-width: 140px; /* Logo etwas kleiner */ 
+      height: auto; 
+      transition: all 0.3s ease; 
+    } 
+    
+    /* Mobile: noch kompakter */ 
+    @media (max-width: 991px) { 
+      .navbar { 
+        padding: 0.4rem 0.7rem !important; 
+      } 
+      
+      .navbar-brand h2 { 
+        font-size: 1.4rem; 
       }
-
-            .content, footer {
-      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      
+      .navbar img { 
+        max-width: 140px; 
+        height: auto; 
+        transition: all 0.3s ease; 
+      } 
+      
+      .nav-link h5 { 
+        font-size: 1rem; 
+      } 
+    } 
+    
+    .navbar.bg-body-tertiary, footer, .sidebar { 
+      background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */ 
+      backdrop-filter: blur(5px); /* Optional: Weichzeichner */ 
+      -webkit-backdrop-filter: blur(5px); /* Safari Support */ 
+    } 
+    
+    .nav-link.active { 
+      color: #8cd000; 
+    } 
+    
+    a:link, a:visited { 
+      text-decoration: none; 
+      color: black; 
+    } 
+    
+    .nav-link:hover { 
+      color: #8cd000; 
+    } 
+    
+    a:active { 
+      text-decoration: underline; 
+      color: #8cd000; 
+    } 
+    
+    .sidebar { 
+      width: 250px; 
+      background: #f4f4f4; 
+      position: fixed; 
+      top: 75px; 
+      left: 0; 
+      height: calc(100vh - 75px); 
+      overflow-y: auto; 
+      padding: 20px; 
+      border-right: 2px solid #ccc; 
+    } 
+    
+    .sidebar ul { 
+      list-style: none; 
+      padding: 0; 
+      margin: 0; 
+    } 
+    
+    .sidebar ul li { 
+      padding: 15px; 
+      cursor: pointer; 
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */ 
+      transition: all 0.3s; 
+    } 
+    
+    .sidebar ul li.active { 
+      background: #ddd; 
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */ 
+    } 
+    
+    .sidebar ul li:hover { 
+      background: #eee; 
+      padding-left: 10px; 
+    } 
+    
+    .offcanvas-body { 
+      padding: 0 !important; /* Entfernt die Verschiebung */ 
+      text-align: center; 
+    } 
+    
+    .offcanvas-body li.nav-link.active a { 
+      color: #8cd000 !important; /* Sattes Bootstrap-Grün */ 
+      background-color: transparent !important; /* Kein Hintergrund */ 
+    } 
+    
+    .sidebar.in-offcanvas { 
+      display: block !important; 
+      position: static !important; 
+      top: auto !important; 
+      left: auto !important; 
+      width: 100% !important; 
+      height: auto !important; 
+      border-right: none !important; 
+      padding: 0 !important; 
+      background: transparent !important; 
+      box-shadow: none !important; 
+      overflow: visible !important; 
+      text-align: center; 
+    } 
+    
+    /* Stil im Offcanvas: Listen etwas auflockern */ 
+    #offcanvasSidebar .sidebar ul { 
+      padding-left: 0; 
+    } 
+    
+    #offcanvasSidebar .sidebar ul li { 
+      padding: 12px 0px; 
+      border-left: none; 
+      border-bottom: 1px solid rgba(0,0,0,0.04); 
+    } 
+    
+    /* --- Offcanvas Navigation zentrieren --- */ 
+    #offcanvasSidebar .offcanvas-body ul { 
+      width: 100%; 
+      text-align: center; 
+    } 
+    
+    #offcanvasSidebar .offcanvas-body ul li { 
+      text-align: center !important; 
+      justify-content: center !important; 
+      padding-left: 0 !important; 
+    } 
+    
+    #offcanvasSidebar .offcanvas-body h5 { 
+      text-align: center !important; 
+      width: 100%; 
+      margin: 0 auto; 
+    } 
+    
+    /* Entfernt Desktop-Styling, das sonst übernommen wird */ 
+    #offcanvasSidebar .sidebar ul li { 
+      border-left: none !important; 
+    } 
+    
+    /* Verhindert dass deine bereits existierende media query .sidebar {display:none;} Sidebar auch im Offcanvas versteckt (die media query in deinem Code versteckt .sidebar unter 991px; wir überschriben das nur wenn .in-offcanvas gesetzt ist) */ 
+    @media (max-width: 991px) { 
+      .sidebar { 
+        display: none !important; 
+      } 
+      
+      /* Desktop-Sidebar verstecken */ 
+      .sidebar.in-offcanvas { 
+        display: block !important; 
+      } 
+      
+      /* aber sichtbar, wenn in offcanvas */ 
+    } 
+    
+    /* Optional: scrollbar styling im Offcanvas (falls lang) */ 
+    #offcanvasSidebar .offcanvas-body { 
+      padding-top: 0.5rem; 
+      padding-bottom: 1rem; 
+      max-height: calc(100vh - 80px); 
+      overflow-y: auto; 
+    } 
+    
+    .content { 
+      margin-left: 250px; 
+      margin-top: 75px; 
+      padding: 20px; 
+      flex: 1; 
+    } 
+    
+    .content-section { 
+      scroll-margin-top: 100px; /* gleicht fixe Navbar aus */ 
+      margin-bottom: 2rem; 
+    } 
+    
+    footer { 
+      text-align: center; 
+      padding: 5px; 
+      background-color: #f5f5f5; 
+      border-top: 1px solid #ccc; 
+    } 
+    
+    .footer-link { 
+      text-decoration: none; /* Kein Unterstrich im Normalzustand */ 
+      color: black; /* Farbe z.B. grau */ 
+      transition: all 0.2s ease; /* Sanfter Übergang */ 
+    } 
+    
+    .footer-link:hover { 
+      text-decoration: underline;/* Unterstrich beim Hover */ 
+      color: black; /* Farbe kann sich beim Hover ändern */ 
+    } 
+    
+    /* Kleine Screens (z.B. iPhone 12) */ 
+    @media (max-width: 400px) {
+      .navbar-logo { 
+        height: 50px; 
+      } 
+      
+      .navbar-title { 
+        display: none; 
+      } 
+      
+      .navbar { 
+        padding: 10px 14px; 
+      } 
+    } 
+    
+    @media (max-height: 910px) { 
+      body { 
+        overflow-y: auto; 
+      } 
+    } 
+    
+    @media screen and (min-width: 1920px) { 
+      html, body { 
+        overflow-y: auto; 
+        height: auto; 
+      } 
+    } 
+    
+    @media (max-width: 991px) { 
+      .sidebar { 
+        display: none; 
+      } 
+      
+      .content { 
+        margin-left: 0; 
       }
-
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1030;
-  background-color: rgba(255,255,255,0.95);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
- padding: 0.25rem 0.75rem !important; /* weniger Höhe */
-  min-height: 58px; /* reduziert Gesamthöhe */
-}
-
-.navbar-brand h2 {
-  font-size: 1.6rem; /* kleinerer Titel */
-  margin: 0; /* kein zusätzlicher Außenabstand */
-  line-height: 1.3;
-  font-weight: 600;
-}
-
-.nav-link h5 {
-  font-size: 1.05rem; /* kompaktere Links */
-  margin: 0; 
-  line-height: 1.3;
-   font-weight: 500;
-}
-
-.navbar img {
-  max-width: 140px; /* Logo etwas kleiner */
-  height: auto;
-  transition: all 0.3s ease;
-}
-
-/* Mobile: noch kompakter */
-@media (max-width: 991px) {
-  .navbar {
-    padding: 0.4rem 0.7rem !important;
-  }
-
-  .navbar-brand h2 {
-    font-size: 1.4rem;
-  }
-
-.navbar img {
-  max-width: 140px;
-  height: auto;
-  transition: all 0.3s ease;
-}
-
-  .nav-link h5 {
-    font-size: 1rem;
-  }
-}
-
-       .navbar.bg-body-tertiary, footer, .sidebar {
-  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
-  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
-  -webkit-backdrop-filter: blur(5px); /* Safari Support */
-}
-
-    .nav-link.active {
-  color: #8cd000;
-}
-
-    a:link, a:visited {
-      text-decoration: none;
-      color: black;
-    }
-
-    .nav-link:hover {
-      color: #8cd000;
-    }
-
-    a:active {
-      text-decoration: underline;
-      color: #8cd000;
-    }
-
-    .sidebar {
-      width: 250px;
-      background: #f4f4f4;
-      position: fixed;
-      top: 75px;
-      left: 0;
-      height: calc(100vh - 75px);
-      overflow-y: auto;
-      padding: 20px;
-      border-right: 2px solid #ccc;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .sidebar ul li {
-      padding: 15px;
-      cursor: pointer;
-      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
-      transition: all 0.3s;
-    }
-
-    .sidebar ul li.active {
-      background: #ddd;
-      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
-    }
-
-    .sidebar ul li:hover {
-      background: #eee;
-      padding-left: 10px;
+    } 
+    
+    a { 
+      text-decoration: none; 
+      display: inline-block; 
+      padding: 8px 16px; 
     }
     
-.offcanvas-body li.nav-link.active a {
-  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
-  background-color: transparent !important; /* Kein Hintergrund */
-}
-
-#offcanvasSidebar .offcanvas-body ul,
-.sidebar ul {
-list-style: none;
-padding: 0;
-margin: 0;
-width: 100%;
-text-align: center;
-}
-
-
-/* UNIFIED LIST ITEM STYLE DESKTOP + MOBILE */
-.sidebar ul li {
-padding: 12px 0;
-cursor: pointer;
-text-align: center;
-font-size: 14px;
-border-bottom: 1px solid rgba(0,0,0,0.05);
-transition: all 0.3s;
-border-left: none !important;
-},
-#offcanvasSidebar .offcanvas-body ul li {
-padding: 14px 0;
-font-size: 16px;
-font-weight: 500;
-text-align: center !important;
-border: none !important;
-margin: 0;
-width: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-transition: background 0.2s;
-}
-
-
-/* ACTIVE STYLE */
-.sidebar ul li.active,
-#offcanvasSidebar .offcanvas-body ul li.active {
-background: #e6e6e6;
-color: #8cd000;
-}
-
-
-/* HOVER */
-.sidebar ul li:hover,
-#offcanvasSidebar .offcanvas-body ul li:hover {
-background: #f3f3f3;
-}
-
-
-/* TEXT INSIDE LI */
-.sidebar ul li a,
-#offcanvasSidebar .offcanvas-body ul li a {
-width: 100%;
-font-size: 16px;
-text-align: center;
-color: black;
-text-decoration: none;
-}
-
-
-/* FIX UNEVEN SIZES: All H5 inside menu */
-#offcanvasSidebar h5,
-.sidebar h5,
-#offcanvasSidebar .offcanvas-body h5 {
-font-size: 16px !important;
-margin: 0;
-width: 100%;
-text-align: center;
-line-height: 1.4;
-}
+    .previous { 
+      background-color: #f1f1f1; 
+      color: black; 
+    } 
     
-/* Verhindert dass deine bereits existierende media query .sidebar {display:none;} Sidebar auch im Offcanvas versteckt
-   (die media query in deinem Code versteckt .sidebar unter 991px; wir überschriben das nur wenn .in-offcanvas gesetzt ist) */
-@media (max-width: 991px) {
-  .sidebar { display: none !important; }          /* Desktop-Sidebar verstecken */
-  .sidebar.in-offcanvas { display: block !important; } /* aber sichtbar, wenn in offcanvas */
-}
-
-/* Optional: scrollbar styling im Offcanvas (falls lang) */
-#offcanvasSidebar .offcanvas-body {
-  padding-top: 0.5rem;
-  padding-bottom: 1rem;
-  max-height: calc(100vh - 80px);
-  overflow-y: auto;
-}
+    .next { 
+      background-color: #8cd000; 
+      color: white; 
+    } 
     
-    .content {
-      margin-left: 250px;
-      margin-top: 75px;
-      padding: 20px;
-      flex: 1;
-    }
-
-    .content-section {
-    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
-    margin-bottom: 2rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 5px;
-      background-color: #f5f5f5;
-      border-top: 1px solid #ccc;
-    }
-
-    .footer-link {
-  text-decoration: none; /* Kein Unterstrich im Normalzustand */
-  color: black;            /* Farbe z.B. grau */
-  transition: all 0.2s ease; /* Sanfter Übergang */
-}
-
-.footer-link:hover {
-  text-decoration: underline;/* Unterstrich beim Hover */
-  color: black;               /* Farbe kann sich beim Hover ändern */
-}
-
-/* Kleine Screens (z.B. iPhone 12) */
-@media (max-width: 400px) {
-  .navbar-logo {
-    height: 50px;
-  }
-  .navbar-title {
-    display: none;
-  }
-  .navbar {
-    padding: 10px 14px;
-  }
-}
+    .button-container { 
+      display: flex; 
+      justify-content: space-between; 
+      margin: 20px; /* optional Abstand nach außen */ 
+    } 
     
-    @media (max-height: 910px) {
-      body {
-        overflow-y: auto;
-      }
+    .prev-button, .next-button { 
+      padding: 10px 20px; 
+      font-size: 16px; 
+      background: #8cd000; 
+      color: white; 
     }
-
-    @media screen and (min-width: 1920px) {
-  html, body {
-    overflow-y: auto;
-    height: auto;
-  }
-}
-    @media (max-width: 991px) {
-      .sidebar {
-        display: none;
-      }
-      .content {
-        margin-left: 0;
-      }
-    }
-
-    a {
-  text-decoration: none;
-  display: inline-block;
-  padding: 8px 16px;
-    }
-
-    .previous {
-  background-color: #f1f1f1;
-  color: black;
-}
-
-.next {
-  background-color: #8cd000;
-  color: white;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px; /* optional Abstand nach außen */
-}
-
-.prev-button,
-.next-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background: #8cd000;
-  color: white;
-}
   </style>
 </head>
 <body>
@@ -550,6 +542,7 @@ line-height: 1.4;
 </body>
 
 </html>
+
 
 
 
