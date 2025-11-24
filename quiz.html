@@ -8,223 +8,184 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <style>
-    html, body { 
-      height: 100%; 
-      margin: 0; 
-      padding: 0; 
-      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */ 
-      background-size: cover; 
-      background-position: center; 
-      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */ 
-    } 
-    
-    body::before { 
-      content: ""; 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%; 
-      z-index: -1; /* Hinter dem Inhalt */ 
-    } 
-    
-    .content, footer {
-      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */ 
-    } 
-    
-    .wrapper { 
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh; 
-    } 
-    
-    .navbar { 
-      position: fixed; 
-      top: 0; 
-      width: 100%; 
-      z-index: 1030; 
-      background-color: rgba(255,255,255,0.95); 
-      backdrop-filter: blur(5px); 
-      -webkit-backdrop-filter: blur(5px); 
-      padding: 0.25rem 0.75rem !important; /* weniger Höhe */ 
-      min-height: 58px; /* reduziert Gesamthöhe */ 
-    } 
-    
-    .navbar-brand h2 { 
-      font-size: 1.6rem; /* kleinerer Titel */ 
-      margin: 0; /* kein zusätzlicher Außenabstand */ 
-      line-height: 1.3; 
-      font-weight: 600; 
-    } 
-    
-    nav-link h5 { 
-      font-size: 1.05rem; /* kompaktere Links */ 
-      margin: 0; 
-      line-height: 1.3; 
-      font-weight: 500; 
-    } 
-    
-    .navbar img { 
-      max-width: 140px; /* Logo etwas kleiner */ 
-      height: auto; 
-      transition: all 0.3s ease; 
-    } 
-    
-    /* Mobile: noch kompakter */ 
-    @media (max-width: 991px) { 
-      .navbar { 
-        padding: 0.4rem 0.7rem !important; 
-      } 
-      
-      .navbar-brand h2 { 
-        font-size: 1.4rem; 
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.wixstatic.com/media/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png/v1/fill/w_824,h_1870,fp_0.31_0.86,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5216d1_a006fd89720a42649457896fc932c5f8~mv2.png'); /* Pfad zu deinem ersten Bild */
+      background-size: cover;
+      background-position: center;
+      color: #000; /* Textfarbe ggf. anpassen, damit es lesbar bleibt */
+    }
+
+          body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hinter dem Inhalt */
       }
-      
-      .navbar img { 
-        max-width: 140px; 
-        height: auto; 
-        transition: all 0.3s ease; 
-      } 
-      
-      .nav-link h5 { 
-        font-size: 1rem; 
-      } 
-    } 
-    
-    .navbar.bg-body-tertiary, footer, .sidebar { 
-      background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */ 
-      backdrop-filter: blur(5px); /* Optional: Weichzeichner */ 
-      -webkit-backdrop-filter: blur(5px); /* Safari Support */ 
-    } 
-    
-    .nav-link.active { 
-      color: #8cd000; 
-    } 
-    
-    a:link, a:visited { 
-      text-decoration: none; 
-      color: black; 
-    } 
-    
-    .nav-link:hover { 
-      color: #8cd000; 
-    } 
-    
-    a:active { 
-      text-decoration: underline; 
-      color: #8cd000; 
-    } 
-    
+
+            .content, footer {
+      background-color: rgba(255, 255, 255, 0.9); /* Weiß mit 90 % Deckkraft */
+      }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+ padding: 0.25rem 0.75rem !important; /* weniger Höhe */
+  min-height: 58px; /* reduziert Gesamthöhe */
+}
+
+.navbar-brand h2 {
+  font-size: 1.6rem; /* kleinerer Titel */
+  margin: 0; /* kein zusätzlicher Außenabstand */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.nav-link h5 {
+  font-size: 1.05rem; /* kompaktere Links */
+  margin: 0; 
+  line-height: 1.3;
+   font-weight: 500;
+}
+
+.navbar img {
+  max-width: 140px; /* Logo etwas kleiner */
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Mobile: noch kompakter */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  .navbar-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .navbar img {
+    max-width: 140px; 
+    height: auto; 
+    transition: all 0.3s ease; 
+  }
+
+  .nav-link h5 {
+    font-size: 1rem;
+  }
+}
+
+       .navbar.bg-body-tertiary, footer, .sidebar {
+  background-color: rgba(255,255,255,0.95) !important; /* Halbtransparent */
+  backdrop-filter: blur(5px); /* Optional: Weichzeichner */
+  -webkit-backdrop-filter: blur(5px); /* Safari Support */
+}
+
+    .nav-link.active {
+  color: #8cd000;
+}
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-link:hover {
+      color: #8cd000;
+    }
+
+    a:active {
+      text-decoration: underline;
+      color: #8cd000;
+    }
+
     .sidebar {
-    width: 250px;
-    background: transparent !important;
-    border-right: none !important;
-    padding: 0 !important;
-    text-align: center;
+      width: 250px;
+      background: #f4f4f4;
+      position: fixed;
+      top: 75px;
+      left: 0;
+      height: calc(100vh - 75px);
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      border-left: 5px solid transparent; /* 🔴 GEÄNDERT */
+      transition: all 0.3s;
+    }
+
+    .sidebar ul li.active {
+      background: #ddd;
+      border-left: 5px solid #8cd000; /* 🔴 GEÄNDERT */
+    }
+
+    .sidebar ul li:hover {
+      background: #eee;
+      padding-left: 10px;
+    }
+
+.offcanvas-body li.nav-link.active a {
+  color: #8cd000 !important; /* Sattes Bootstrap-Grün */
+  background-color: transparent !important; /* Kein Hintergrund */
 }
 
-.sidebar ul {
-    padding: 0 !important;
-    margin: 0 !important;
-    list-style: none;
-    width: 100%;
+    .content {
+      margin-left: 250px;
+      margin-top: 75px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .content-section {
+    scroll-margin-top: 100px; /* gleicht fixe Navbar aus */
+    margin-bottom: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-link {
+  text-decoration: none; /* Kein Unterstrich im Normalzustand */
+  color: black;            /* Farbe z.B. grau */
+  transition: all 0.2s ease; /* Sanfter Übergang */
 }
 
-.sidebar ul li {
-    padding: 12px 0;
-    font-size: 14px; /* etwas kleiner als Offcanvas */
-    text-align: center;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-    margin: 0;
-    cursor: pointer;
-    background: transparent !important;
-    border-left: none !important;
-    transition: none !important; /* exakt wie offcanvas */
+.footer-link:hover {
+  text-decoration: underline;/* Unterstrich beim Hover */
+  color: black;               /* Farbe kann sich beim Hover ändern */
 }
 
-.sidebar ul li:hover {
-    background: transparent !important;
-    padding-left: 0 !important; /* Offcanvas hat keinen Hover-Indents */
-}
-
-.sidebar ul li.active {
-    background: transparent !important;
-    color: #8cd000 !important; /* nur Textfarbe ändern */
-    border-left: none !important;
-}
-
-/* Links in Sidebar formatieren wie Offcanvas */
-.sidebar ul li a {
-    color: black;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar ul li.active a {
-    color: #8cd000 !important;
-}
-    
-    .offcanvas-body li.nav-link.active a { 
-      color: #8cd000 !important; /* Sattes Bootstrap-Grün */ 
-      background-color: transparent !important; /* Kein Hintergrund */ 
-    } 
-    
-    /* Verhindert dass deine bereits existierende media query .sidebar {display:none;} Sidebar auch im Offcanvas versteckt (die media query in deinem Code versteckt .sidebar unter 991px; wir überschriben das nur wenn .in-offcanvas gesetzt ist) */ 
-    @media (max-width: 991px) { 
-      .sidebar { 
-        display: none !important; 
-      } 
-      
-      /* Desktop-Sidebar verstecken */ 
-      .sidebar.in-offcanvas { 
-        display: block !important; 
-      } 
-      
-      /* aber sichtbar, wenn in offcanvas */ 
-    } 
-    
-    /* Optional: scrollbar styling im Offcanvas (falls lang) */ 
-    #offcanvasSidebar .offcanvas-body { 
-      padding-top: 0.5rem; 
-      padding-bottom: 1rem; 
-      max-height: calc(100vh - 80px); 
-      overflow-y: auto; 
-    } 
-    
-    .content { 
-      margin-left: 250px; 
-      margin-top: 75px; 
-      padding: 20px; 
-      flex: 1; 
-    } 
-    
-    .content-section { 
-      scroll-margin-top: 100px; /* gleicht fixe Navbar aus */ 
-      margin-bottom: 2rem; 
-    } 
-    
-    footer { 
-      text-align: center; 
-      padding: 5px; 
-      background-color: #f5f5f5; 
-      border-top: 1px solid #ccc; 
-    } 
-    
-    .footer-link { 
-      text-decoration: none; /* Kein Unterstrich im Normalzustand */ 
-      color: black; /* Farbe z.B. grau */ 
-      transition: all 0.2s ease; /* Sanfter Übergang */ 
-    } 
-    
-    .footer-link:hover { 
-      text-decoration: underline;/* Unterstrich beim Hover */ 
-      color: black; /* Farbe kann sich beim Hover ändern */ 
-    } 
-    
-    /* Kleine Screens (z.B. iPhone 12) */ 
+      /* Kleine Screens (z.B. iPhone 12) */ 
     @media (max-width: 400px) {
       .navbar-logo { 
         height: 50px; 
@@ -238,58 +199,57 @@
         padding: 10px 14px; 
       } 
     } 
-    
-    @media (max-height: 910px) { 
-      body { 
-        overflow-y: auto; 
-      } 
-    } 
-    
-    @media screen and (min-width: 1920px) { 
-      html, body { 
-        overflow-y: auto; 
-        height: auto; 
-      } 
-    } 
-    
-    @media (max-width: 991px) { 
-      .sidebar { 
-        display: none; 
-      } 
-      
-      .content { 
-        margin-left: 0; 
+
+    @media (max-height: 910px) {
+      body {
+        overflow-y: auto;
       }
-    } 
-    
-    a { 
-      text-decoration: none;
-      display: inline-block;
-      padding: 8px 16px;
     }
-    
-    .previous { 
-      background-color: #f1f1f1; 
-      color: black; 
-    } 
-    
-    .next { 
-      background-color: #8cd000; 
-      color: white; 
-    } 
-    
-    .button-container { 
-      display: flex; 
-      justify-content: space-between; 
-      margin: 20px; /* optional Abstand nach außen */
-    } 
-    
-    .prev-button, .next-button { 
-      padding: 10px 20px; 
-      font-size: 16px; 
-      background: #8cd000; 
-      color: white; 
+
+    @media screen and (min-width: 1920px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+}
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+      }
     }
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+    }
+
+    .previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #8cd000;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* optional Abstand nach außen */
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #8cd000;
+  color: white;
+}
   </style>
 </head>
 <body>
@@ -302,7 +262,7 @@
     </button>
 
     <!-- Titel links -->
-    <a class="navbar-brand" href="index.html"><h2 class="navbar-title">IT-SAFEZONE</h2></a>
+    <a class="navbar-brand" href="index.html"><h2>IT-SAFEZONE</h2></a>
 
     <!-- ZENTRIERTE LINKS -->
     <div class="d-none d-lg-flex justify-content-center flex-grow-1">
@@ -316,7 +276,7 @@
     </div>
 
     <!-- Logo rechts -->
-    <img src="BUG_Logo_Gruppe_RGB.png" width="200" alt="BUG Gruppe Logo" class="navbar-logo">
+    <img src="BUG_Logo_Gruppe_RGB.png" alt="BUG Gruppe Logo" class="img-fluid">
   </div>
 </nav>
 
@@ -439,86 +399,6 @@
       });
     });
   });
-
-  (function() {
-  const sidebar = document.querySelector('.sidebar');
-  const offcanvasBody = document.querySelector('#offcanvasSidebar .offcanvas-body');
-  if (!sidebar || !offcanvasBody) return; // Sicherheit
-
-  // Erstelle Platzhalter, damit wir die Sidebar zurücktauschen können
-  const placeholder = document.createElement('div');
-  placeholder.id = 'sidebar-placeholder';
-
-  // Funktion: verschiebe Sidebar ins Offcanvas (mobile) oder zurück (desktop)
-  function relocateSidebar() {
-    const isMobile = window.innerWidth <= 991; // gleiche Breakpoint wie dein CSS
-    if (isMobile) {
-      // wenn Sidebar noch nicht im Offcanvas ist: verschieben
-      if (!sidebar.classList.contains('in-offcanvas')) {
-        // Ersetze Sidebar durch Placeholder am Originalplatz
-        sidebar.parentNode.replaceChild(placeholder, sidebar);
-        // Füge Klasse hinzu, damit CSS anpasst
-        sidebar.classList.add('in-offcanvas');
-        // Hänge Sidebar ans offcanvas body (vorhandene Inhalte bleiben erhalten)
-        offcanvasBody.appendChild(sidebar);
-      }
-    } else {
-      // Desktop: wenn Sidebar aktuell in offcanvas ist -> zurücksetzen
-      if (sidebar.classList.contains('in-offcanvas')) {
-        // Entferne Klasse
-        sidebar.classList.remove('in-offcanvas');
-        // Entferne von Offcanvas und setze am ursprünglichen Ort zurück (replace placeholder)
-        if (placeholder.parentNode) {
-          placeholder.parentNode.replaceChild(sidebar, placeholder);
-        } else {
-          // Fallback: füge an body an (sollte nicht nötig sein)
-          document.body.insertBefore(sidebar, document.body.firstChild);
-        }
-      }
-    }
-  }
-
-  // Initial beim Laden
-  window.addEventListener('load', relocateSidebar);
-  // Bei Resize (auch Rotate)
-  window.addEventListener('resize', () => {
-    // throttle simple: Kleine Verzögerung, um unnötiges Rumhüpfen zu vermeiden
-    clearTimeout(window._relocateSidebarTimeout);
-    window._relocateSidebarTimeout = setTimeout(relocateSidebar, 120);
-  });
-
-  // Optional: Schließe offcanvas, wenn ein Sidebar-Link geklickt wurde (UX)
-  offcanvasBody.addEventListener('click', (e) => {
-    const target = e.target.closest('.sidebar a, .sidebar li');
-    if (!target) return;
-    // Wenn offcanvas sichtbar: benutze Bootstrap's Offcanvas-API, wenn vorhanden
-    try {
-      const offcanvasEl = document.getElementById('offcanvasSidebar');
-      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
-      bsOffcanvas.hide();
-    } catch (err) {
-      // no-op
-    }
-  });
-})();
 </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
