@@ -149,31 +149,30 @@
       background: #eee;
       padding-left: 10px;
     }
-/* Offcanvas-Menü sauber zentrieren */
-#offcanvasSidebar .offcanvas-body {
+.offcanvas-nav-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* vertikal zentriert */
-  align-items: center;       /* horizontal zentriert */
+  align-items: center;
   text-align: center;
+  justify-content: flex-start !important; /* oben fix */
 }
 
-#offcanvasSidebar ul {
+.offcanvas-mainmenu,
+.offcanvas-sidebaritems {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   width: 100%;
 }
 
-#offcanvasSidebar li {
+.offcanvas-mainmenu li,
+.offcanvas-sidebaritems li {
+  padding: 10px 0;
   width: 100%;
-  text-align: center;
-  padding: 12px 0;
 }
 
-#offcanvasSidebar li a {
-  display: inline-block;
-  width: 100%;
+.offcanvas-sidebaritems {
+  margin-top: 20px; /* Abstand zwischen Menügruppen */
 }
 .offcanvas-body li.nav-link.active a {
   color: #8cd000 !important; /* Sattes Bootstrap-Grün */
@@ -305,7 +304,12 @@
   </div>
 </nav>
 
-    <!-- Sidebar -->
+ <div class="offcanvas offcanvas-start text-center" tabindex="-1" id="offcanvasSidebar">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas"></button>
+  </div>
+   
+<!-- Sidebar -->
  <div class="sidebar d-none d-lg-block">
     <ul>
       <li class="menu-item active" data-section="Allgemeines">Allgemeines</li>
@@ -320,22 +324,32 @@
     </ul>
   </div>
 
-  <!-- Offcanvas Sidebar (Mobile) -->
-  <div class="offcanvas offcanvas-start d-flex flex-column align-items-center text-center" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
-    <div class="offcanvas-header">
-      <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" aria-label="Schließen"></button>
-    </div>
-    <div class="offcanvas-body">
-      <ul>
-        <li class="nav-link"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
-        <li class="nav-link"><a href="methoden.html"><h5>METHODEN</h5></a></li>
-        <li class="nav-link"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
-        <li class="nav-link"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
-        <li class="nav-link active"><a href="quiz.html"><h5>QUIZ</h5></a></li>
-      </ul>
-    </div>
-  </div>
+  <div class="offcanvas-body offcanvas-nav-wrapper">
 
+    <!-- Hauptnavigation -->
+    <ul class="offcanvas-mainmenu">
+      <li><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+      <li><a href="methoden.html"><h5>METHODEN</h5></a></li>
+      <li><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+      <li><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+      <li class="active"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+    </ul>
+
+    <!-- Sidebar-Punkte (unterhalb) -->
+    <ul class="offcanvas-sidebaritems mt-4">
+      <li data-section="Allgemeines">Allgemeines</li>
+      <li data-section="Malware">Malware</li>
+      <li data-section="Spam">Spam</li>
+      <li data-section="Phishing">Phishing</li>
+      <li data-section="mitm">Man-in-the-Middle-Angriff</li>
+      <li data-section="ddos">DoS- und DDoS-Angriffe</li>
+      <li data-section="Beispiele">Beispiele</li>
+      <li data-section="Schutz">Schutz</li>
+      <li data-section="Notfälle">Notfälle</li>
+    </ul>
+
+  </div>
+</div>
     <!-- Main Content -->
     <div class="content">
       <section id="Allgemeines" class="content-section">
@@ -427,5 +441,6 @@
 </script>
 </body>
 </html>
+
 
 
