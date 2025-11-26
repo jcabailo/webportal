@@ -198,6 +198,11 @@
   background-color: transparent !important; /* Kein Hintergrund */
 }
 
+.offcanvas-sidebaritems li.active {
+  color: #8cd000 !important;
+  background-color: transparent !important; /* Kein Hintergrund */
+}
+
     .content {
       margin-left: 250px;
       margin-top: 75px;
@@ -446,6 +451,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Funktion zum Setzen der aktiven Markierung in beiden Sidebars
+  function setActiveSidebar(sectionId) {
+    offcanvasItems.forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-section') === sectionId);
+    });
+  }
+  
   // Desktop Sidebar
   menuItems.forEach(item => {
     item.addEventListener('click', function () {
@@ -463,6 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const sectionId = this.getAttribute('data-section');
       showSection(sectionId);
+      setActiveSidebar(sectionId);
 
       // Offcanvas schließen
       const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasSidebar'));
@@ -474,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
