@@ -428,52 +428,53 @@
   </div>
 
 <script>
-  document.querySelectorAll('.offcanvas-sidebaritems li').forEach(item => {
-  item.addEventListener('click', function () {
-    const sectionId = this.getAttribute('data-section');
+document.addEventListener('DOMContentLoaded', () => {
 
+  const menuItems = document.querySelectorAll('.menu-item'); // Desktop Sidebar
+  const offcanvasItems = document.querySelectorAll('.offcanvas-sidebaritems li'); // Mobile Sidebar
+  const sections = document.querySelectorAll('.content-section');
+
+  // Zuerst alles verstecken außer dem ersten
+  sections.forEach((section, index) => {
+    section.style.display = index === 0 ? 'block' : 'none';
+  });
+
+  // Funktion zum Anzeigen einer Sektion
+  function showSection(sectionId) {
     sections.forEach(section => {
       section.style.display = (section.id === sectionId) ? 'block' : 'none';
     });
+  }
 
-    // Offcanvas schließen
-    const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasSidebar'));
-    offcanvas.hide();
+  // Desktop Sidebar
+  menuItems.forEach(item => {
+    item.addEventListener('click', function () {
+      menuItems.forEach(el => el.classList.remove('active'));
+      this.classList.add('active');
+
+      const sectionId = this.getAttribute('data-section');
+      showSection(sectionId);
+    });
   });
+
+  // Offcanvas Sidebar
+  offcanvasItems.forEach(item => {
+    item.addEventListener('click', function () {
+
+      const sectionId = this.getAttribute('data-section');
+      showSection(sectionId);
+
+      // Offcanvas schließen
+      const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasSidebar'));
+      offcanvas.hide();
+    });
+  });
+
 });
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuItems = document.querySelectorAll('.menu-item');
-    const sections = document.querySelectorAll('.content-section');
-
-    // Zuerst alles verstecken außer dem ersten
-    sections.forEach((section, index) => {
-      section.style.display = index === 0 ? 'block' : 'none';
-    });
-
-    menuItems.forEach(item => {
-      item.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        // Sidebar-Styling aktualisieren
-        menuItems.forEach(el => el.classList.remove('active'));
-        this.classList.add('active');
-
-        // Abschnitt ermitteln und anzeigen
-        const sectionId = this.getAttribute('data-section');
-        sections.forEach(section => {
-          if (section.id === sectionId) {
-            section.style.display = 'block';
-          } else {
-            section.style.display = 'none';
-          }
-        });
-      });
-    });
-  });
 </script>
 </body>
 </html>
+
 
 
 
