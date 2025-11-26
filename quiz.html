@@ -149,30 +149,49 @@
       background: #eee;
       padding-left: 10px;
     }
+/* Offcanvas wieder wie vorher – NICHT vertical centered! */
 .offcanvas-nav-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  justify-content: flex-start !important; /* oben fix */
 }
 
-.offcanvas-mainmenu,
+/* Hauptnavigation kompakt */
+.offcanvas-mainmenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.offcanvas-mainmenu li {
+  padding: 6px 0;
+}
+
+.offcanvas-mainmenu li a h5 {
+  margin: 0;
+}
+
+/* Sidebar-Punkte direkt darunter */
 .offcanvas-sidebaritems {
   list-style: none;
-  margin: 0;
   padding: 0;
-  width: 100%;
+  margin-top: 10px;   /* kleiner Abstand wie früher */
 }
 
-.offcanvas-mainmenu li,
 .offcanvas-sidebaritems li {
-  padding: 10px 0;
-  width: 100%;
+  padding: 4px 0;
+  cursor: pointer;
 }
 
-.offcanvas-sidebaritems {
-  margin-top: 20px; /* Abstand zwischen Menügruppen */
+/* Aktiver Link wie beim Desktop: GRÜN */
+.offcanvas-mainmenu li.nav-link.active a h5 {
+  color: #8cd000 !important;
+}
+
+/* Hover wie gewohnt */
+.offcanvas-mainmenu li a h5:hover,
+.offcanvas-sidebaritems li:hover {
+  color: #8cd000;
 }
 .offcanvas-body li.nav-link.active a {
   color: #8cd000 !important; /* Sattes Bootstrap-Grün */
@@ -304,12 +323,7 @@
   </div>
 </nav>
 
- <div class="offcanvas offcanvas-start text-center" tabindex="-1" id="offcanvasSidebar">
-  <div class="offcanvas-header">
-    <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas"></button>
-  </div>
-   
-<!-- Sidebar -->
+    <!-- Sidebar -->
  <div class="sidebar d-none d-lg-block">
     <ul>
       <li class="menu-item active" data-section="Allgemeines">Allgemeines</li>
@@ -323,20 +337,25 @@
       <li class="menu-item" data-section="Notfälle">Notfälle</li>
     </ul>
   </div>
+    
+ <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="offcanvas"></button>
+  </div>
 
   <div class="offcanvas-body offcanvas-nav-wrapper">
 
     <!-- Hauptnavigation -->
-    <ul class="offcanvas-mainmenu">
-      <li><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
-      <li><a href="methoden.html"><h5>METHODEN</h5></a></li>
-      <li><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
-      <li><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
-      <li class="active"><a href="quiz.html"><h5>QUIZ</h5></a></li>
+    <ul class="offcanvas-mainmenu text-center">
+      <li class="nav-link"><a href="allgemeines.html"><h5>ALLGEMEINES</h5></a></li>
+      <li class="nav-link"><a href="methoden.html"><h5>METHODEN</h5></a></li>
+      <li class="nav-link"><a href="beispiele.html"><h5>BEISPIELE</h5></a></li>
+      <li class="nav-link"><a href="schutz.html"><h5>SCHUTZ</h5></a></li>
+      <li class="nav-link active"><a href="quiz.html"><h5>QUIZ</h5></a></li>
     </ul>
 
-    <!-- Sidebar-Punkte (unterhalb) -->
-    <ul class="offcanvas-sidebaritems mt-4">
+    <!-- Sidebar-Bereiche (direkt darunter) -->
+    <ul class="offcanvas-sidebaritems text-center">
       <li data-section="Allgemeines">Allgemeines</li>
       <li data-section="Malware">Malware</li>
       <li data-section="Spam">Spam</li>
@@ -409,6 +428,20 @@
   </div>
 
 <script>
+  document.querySelectorAll('.offcanvas-sidebaritems li').forEach(item => {
+  item.addEventListener('click', function () {
+    const sectionId = this.getAttribute('data-section');
+
+    sections.forEach(section => {
+      section.style.display = (section.id === sectionId) ? 'block' : 'none';
+    });
+
+    // Offcanvas schließen
+    const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasSidebar'));
+    offcanvas.hide();
+  });
+});
+  
   document.addEventListener('DOMContentLoaded', () => {
     const menuItems = document.querySelectorAll('.menu-item');
     const sections = document.querySelectorAll('.content-section');
@@ -441,6 +474,7 @@
 </script>
 </body>
 </html>
+
 
 
 
