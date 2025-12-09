@@ -289,7 +289,7 @@
     <!-- Sidebar -->
  <div class="sidebar d-none d-lg-block">
     <ul>
-      <li class="menu-item active" data-section="Wie schützt man sich vor?">Wie schützt man sich vor?</li>
+      <li class="menu-item" data-section="Wie schützt man sich vor?">Wie schützt man sich vor?</li>
       <li class="menu-item" data-section="Organisatorische Maßnahmen">Organisatorische Maßnahmen</li>
       <li class="menu-item" data-section="Technische Maßnahmen">Technische Maßnahmen</li>
       <li class="menu-item" data-section="Notfälle">Notfälle</li>
@@ -445,10 +445,12 @@
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 150;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (pageYOffset >= sectionTop && pageYOffset < sectionBottom) {
+        current = section.getAttribute('id');
+      }
+    });
 
       menuItems.forEach(item => {
         item.classList.remove('active');
@@ -462,5 +464,6 @@
 </body>
 
 </html>
+
 
 
