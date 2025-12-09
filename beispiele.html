@@ -411,7 +411,7 @@ img[width], img[height], svg[width], svg[height] {
     <!-- Sidebar -->
  <div class="sidebar d-none d-lg-block">
     <ul>
-      <li class="menu-item active" data-section="malware">Malware</li>
+      <li class="menu-item" data-section="malware">Malware</li>
       <li class="menu-item" data-section="spam">Spam</li>
       <li class="menu-item" data-section="phishing">Phishing</li>
       <!--<li class="menu-item" data-section="ransomware">Ransomware</li> -->
@@ -1049,10 +1049,12 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 150;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (pageYOffset >= sectionTop && pageYOffset < sectionBottom) {
+        current = section.getAttribute('id');
+      }
+    });
 
       menuItems.forEach(item => {
         item.classList.remove('active');
@@ -1066,6 +1068,7 @@ Gefahren:<br>Betriebsstörungen, Identitätsdiebstahl, Malware-Injektion
 </body>
 
 </html>
+
 
 
 
