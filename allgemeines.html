@@ -336,7 +336,7 @@ a[data-bs-toggle="mytooltip"] {
     <!-- Sidebar -->
  <div class="sidebar d-none d-lg-block">
     <ul>
-        <li class="menu-item active" data-section="definition">Definition</li>
+        <li class="menu-item" data-section="definition">Definition</li>
         <li class="menu-item" data-section="gründe">Gründe</li>
         <li class="menu-item" data-section="risiken">Risiken</li>
         <li class="menu-item" data-section="auswirkungen">Auswirkungen</li>
@@ -473,10 +473,12 @@ Schließlich gibt es auch <b>gesellschaftliche Auswirkungen</b>. Angriffe auf kr
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 150;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (pageYOffset >= sectionTop && pageYOffset < sectionBottom) {
+        current = section.getAttribute('id');
+      }
+    });
 
       menuItems.forEach(item => {
         item.classList.remove('active');
@@ -549,6 +551,7 @@ Schließlich gibt es auch <b>gesellschaftliche Auswirkungen</b>. Angriffe auf kr
 </body>
 
 </html>
+
 
 
 
