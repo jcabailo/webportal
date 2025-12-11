@@ -391,8 +391,22 @@
       <p>© IT-SafeZone | <a href="https://www.bug-gruppe.de/impressum" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Impressum</a> | <a href="https://www.bug-gruppe.de/datenschutz" class="footer-link" target="_blank" rel="noopener noreferrer" style="color: #222;">Datenschutz</a></p>
     </footer>
   </div>
+<script>
+// Offcanvas automatisch schließen, sobald Viewport >= 992px wird
+window.addEventListener("resize", function () {
+    if (window.innerWidth >= 992) {
+        const offcanvasEl = document.getElementById("offcanvasSidebar");
+        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasEl);
+
+        if (offcanvasInstance) {
+            offcanvasInstance.hide();
+        }
+    }
+});
+</script>
 </body>
 </html>
+
 
 
 
