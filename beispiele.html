@@ -251,12 +251,6 @@ img[width], img[height], svg[width], svg[height] {
     max-height: 250px;
   }
   
-@media (max-width: 600px) {
-    .navbar-title {
-    display: none; /* kein Titel  */
-  }
-}
-  
 img[width], img[height], svg[width], svg[height] {
   width: auto !important;
   height: auto !important;
@@ -295,6 +289,12 @@ img[width], img[height], svg[width], svg[height] {
   }
   .navbar {
     padding: 10px 14px; /* Navbar kompakter */
+  }
+}
+    
+    @media (max-width: 600px) {
+    .navbar-title {
+    display: none; /* kein Titel  */
   }
 }
     
@@ -1088,6 +1088,7 @@ window.addEventListener("resize", function () {
 </body>
 
 </html>
+
 
 
 
