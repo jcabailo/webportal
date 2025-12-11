@@ -648,9 +648,23 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('beforeunload', hideAllTooltips);
 });
 </script>
+<script>
+// Offcanvas automatisch schließen, sobald Viewport >= 992px wird
+window.addEventListener("resize", function () {
+    if (window.innerWidth >= 992) {
+        const offcanvasEl = document.getElementById("offcanvasSidebar");
+        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasEl);
+
+        if (offcanvasInstance) {
+            offcanvasInstance.hide();
+        }
+    }
+});
+</script>
 </body>
 
 </html>
+
 
 
 
