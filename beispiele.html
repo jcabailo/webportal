@@ -250,7 +250,13 @@ img[width], img[height], svg[width], svg[height] {
     height: auto;
     max-height: 250px;
   }
-
+  
+@media (max-width: 600px) {
+    .navbar-title {
+    display: none; /* kein Titel  */
+  }
+}
+  
 img[width], img[height], svg[width], svg[height] {
   width: auto !important;
   height: auto !important;
@@ -1082,6 +1088,7 @@ window.addEventListener("resize", function () {
 </body>
 
 </html>
+
 
 
 
