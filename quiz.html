@@ -255,7 +255,13 @@
       .navbar { 
         padding: 10px 14px; 
       } 
-    } 
+    }
+    
+    @media (max-width: 600px) {
+    .navbar-title {
+    display: none; /* kein Titel  */
+  }
+}
   </style>
 </head>
 <body>
@@ -406,6 +412,7 @@ window.addEventListener("resize", function () {
 </script>
 </body>
 </html>
+
 
 
 
